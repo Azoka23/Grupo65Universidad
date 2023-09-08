@@ -25,9 +25,6 @@ public class AlumnoDAO extends DAO {
         }
     }
 
-    
-    
-
     public void modificarAlumno(Alumno alumno) throws Exception {
         try {
             if (alumno == null) {
@@ -47,11 +44,10 @@ public class AlumnoDAO extends DAO {
         } catch (Exception e) {
             throw e;
         }
-        }
-    
-    
-    public void eliminarAlumnoLogico(Alumno alumno) throws Exception{
-    try {
+    }
+
+    public void eliminarAlumnoLogico(Alumno alumno) throws Exception {
+        try {
             if (alumno == null) {
                 throw new Exception("Debes indicar un alumno");
             }
@@ -59,25 +55,30 @@ public class AlumnoDAO extends DAO {
                     + " WHERE dni=?";
             PreparedStatement ps = conexion.prepareStatement(sql);
 
-          
             ps.setBoolean(1, false);
             ps.setInt(2, alumno.getDni());
             insertarModificarEliminar(sql);
-            
-        }catch(Exception e){
-        throw e;
+
+        } catch (Exception e) {
+            throw e;
         }
-    }
-    
-    
-    
-    public void buscarAlumnoxDni(int dni ) {
-        try {
-            if (alumno == null) {
-                throw new Exception("Debes indicar un alumno");
-            }
-        }
-    }
-    
     }
 
+    public void buscarAlumnoxDni(int dni) throws Exception {
+        try {
+
+            String sql = "SELECT * FROM alumnos"
+                    + "WHERE dni=?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1,dni);
+            consultarBase(sql);
+            Alumno alumno = null;
+            while (resultado.next()) {
+al
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+}
