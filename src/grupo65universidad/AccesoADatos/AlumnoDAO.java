@@ -50,6 +50,34 @@ public class AlumnoDAO extends DAO {
         }
     
     
+    public void eliminarAlumnoLogico(Alumno alumno) throws Exception{
+    try {
+            if (alumno == null) {
+                throw new Exception("Debes indicar un alumno");
+            }
+            String sql = "UPDATE alumnos SET (estado=?)"
+                    + " WHERE dni=?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+
+          
+            ps.setBoolean(1, false);
+            ps.setInt(2, alumno.getDni());
+            insertarModificarEliminar(sql);
+            
+        }catch(Exception e){
+        throw e;
+        }
+    }
+    
+    
+    
+    public void buscarAlumnoxDni(int dni ) {
+        try {
+            if (alumno == null) {
+                throw new Exception("Debes indicar un alumno");
+            }
+        }
+    }
     
     }
-}
+
