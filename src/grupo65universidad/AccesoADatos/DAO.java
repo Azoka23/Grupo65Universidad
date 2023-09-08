@@ -13,23 +13,23 @@ public class DAO {
     protected Connection conexion = null;
     protected ResultSet resultado = null;
     protected Statement sentencia = null;
-    private final String usuario = "root";
-    private final String password = "";
-    private final String DataBase = "Universidad";
-    private final String Driver = "org.mariadb.jdbc.Driver";
-    private final String url = "jdbc:mariadb://Localhost:3306/DataBase";
+    private final String USUARIO = "root";
+    private final String PASSWORD = "";
+    private final String DB = "Universidad";
+    private final String DRIVER = "org.mariadb.jdbc.Driver";
+    private final String URL = "jdbc:mariadb://Localhost:3306/DataBase";
 
     protected void conectarBase() {
         try {
-            Class.forName(Driver);
-            conexion = DriverManager.getConnection(url, usuario, password);
+            Class.forName(DRIVER);
+            conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse");
         }
     }
 
-    protected void desconectarBase() {
-        try {
+    protected void desconectarBase()  {
+        try{
             if (resultado != null) {
                 resultado.close();
             }
@@ -54,7 +54,7 @@ public class DAO {
             //set.autocommit = 1;
             //Commit;
             JOptionPane.showMessageDialog(null, "Ejecucion satisfactoria");
-            ;
+            
         } finally {
             desconectarBase();
         }
