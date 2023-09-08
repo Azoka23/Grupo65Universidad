@@ -24,4 +24,32 @@ public class AlumnoDAO extends DAO {
             throw e;
         }
     }
+
+    
+    
+
+    public void modificarAlumno(Alumno alumno) throws Exception {
+        try {
+            if (alumno == null) {
+                throw new Exception("Debes indicar un alumno");
+            }
+
+            String sql = "UPDATE alumnos SET (apellido=?,nombre=?,fechaNacimiento=?,estado=?)"
+                    + " WHERE dni=?";
+            PreparedStatement ps = conexion.prepareStatement(sql);
+
+            ps.setString(1, alumno.getApellido());
+            ps.setString(2, alumno.getNombre());
+            ps.setDate(3, Date.valueOf(alumno.getFechaNacimiento()));
+            ps.setBoolean(4, alumno.isEstado());
+            ps.setInt(5, alumno.getDni());
+            insertarModificarEliminar(sql);
+        } catch (Exception e) {
+            throw e;
+        }
+        }
+    
+    
+    
+    }
 }
