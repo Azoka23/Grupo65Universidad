@@ -45,7 +45,7 @@ public class Menu extends javax.swing.JFrame {
         jManipulacionNotas = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jConsultasMaterias = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        jSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,8 +103,8 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setText("Salir");
-        jMenuBar1.add(jMenu6);
+        jSalir.setText("Salir");
+        jMenuBar1.add(jSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -194,7 +194,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jSalir;
     // End of variables declaration//GEN-END:variables
 }
