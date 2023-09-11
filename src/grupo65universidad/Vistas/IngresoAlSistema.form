@@ -147,7 +147,7 @@
           <Font name="Academy Engraved LET" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/Users/marcelaaliciaarroyo/Desktop/JAVA/Images interfaz/32officeicons-31_89708.png"/>
+          <Image iconType="3" name="/grupo65universidad/Vistas/Imagenes/32officeicons-31_89708.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="BIENVENIDO AL SISTEMA"/>
       </Properties>

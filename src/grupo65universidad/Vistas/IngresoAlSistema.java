@@ -92,7 +92,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
 
         jlBienvenida.setBackground(new java.awt.Color(0, 75, 102));
         jlBienvenida.setFont(new java.awt.Font("Academy Engraved LET", 1, 18)); // NOI18N
-        jlBienvenida.setIcon(new javax.swing.ImageIcon("/Users/marcelaaliciaarroyo/Desktop/JAVA/Images interfaz/32officeicons-31_89708.png")); // NOI18N
+        jlBienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/32officeicons-31_89708.png"))); // NOI18N
         jlBienvenida.setText("BIENVENIDO AL SISTEMA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,7 +127,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         jpLogging.repaint();
         Menu is=new Menu();
         is.setVisible(true);
-        //jpLogging.add(is);
+        
         is.setLocationRelativeTo(null);
         
         
