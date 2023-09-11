@@ -192,7 +192,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-       // eliminadoLogico();
+       // eliminar();
 
     }//GEN-LAST:event_jBEliminarActionPerformed
 
