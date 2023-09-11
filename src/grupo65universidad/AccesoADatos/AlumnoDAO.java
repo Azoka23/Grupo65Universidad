@@ -3,6 +3,8 @@ package grupo65universidad.AccesoADatos;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class AlumnoDAO extends DAO {
 
@@ -64,18 +66,26 @@ public class AlumnoDAO extends DAO {
         }
     }
 
-    public void buscarAlumnoxDni(int dni) throws Exception {
+    public Collection<Alumno> buscarListaAlumnoxDni(int dni) throws Exception {
         try {
 
             String sql = "SELECT * FROM alumnos"
                     + "WHERE dni=?";
             PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1,dni);
+            ps.setInt(1, dni);
             consultarBase(sql);
             Alumno alumno = null;
+            Collection<Alumno> alumnos = new ArrayList();
             while (resultado.next()) {
-al
+                alumno = new Alumno();
+                alumno.setApellido(resultado.getString("apellido"));
+                alumno.setNombre(resultado.getString("nombre"));
+                alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
+                alumno.setEstado(resultado.getBoolean("estado"));
+                alumnos.add(alumno);
             }
+            desconectarBase();
+            return alumnos;
         } catch (Exception e) {
             throw e;
         }
