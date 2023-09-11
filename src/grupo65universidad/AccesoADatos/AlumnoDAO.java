@@ -76,7 +76,7 @@ public class AlumnoDAO extends DAO {
             consultarBase(sql);
             Alumno alumno = null;
             Collection<Alumno> alumnos = new ArrayList();
-            while (resultado.next()) {
+            while (resultado.next()) {//armamos el alumno
                 alumno = new Alumno();
                 alumno.setApellido(resultado.getString("apellido"));
                 alumno.setNombre(resultado.getString("nombre"));
