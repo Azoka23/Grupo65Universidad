@@ -48,7 +48,7 @@ public class AlumnoDAO extends DAO {
         }
     }
 
-    public void eliminarAlumnoLogico(Alumno alumno) throws Exception {
+    public  void eliminarAlumnoLogico(Alumno alumno) throws Exception {
         try {
             if (alumno == null) {
                 throw new Exception("Debes indicar un alumno");
@@ -66,7 +66,7 @@ public class AlumnoDAO extends DAO {
         }
     }
 
-    public Collection<Alumno> buscarListaAlumnoxDni(int dni) throws Exception {
+    public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         try {
 
             String sql = "SELECT * FROM alumnos"
@@ -75,17 +75,17 @@ public class AlumnoDAO extends DAO {
             ps.setInt(1, dni);
             consultarBase(sql);
             Alumno alumno = null;
-            Collection<Alumno> alumnos = new ArrayList();
+            //Collection<Alumno> alumnos = new ArrayList();
             while (resultado.next()) {//armamos el alumno
                 alumno = new Alumno();
                 alumno.setApellido(resultado.getString("apellido"));
                 alumno.setNombre(resultado.getString("nombre"));
                 alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(resultado.getBoolean("estado"));
-                alumnos.add(alumno);
+                //alumnos.add(alumno);
             }
             desconectarBase();
-            return alumnos;
+            return alumno;
         } catch (Exception e) {
             throw e;
         }

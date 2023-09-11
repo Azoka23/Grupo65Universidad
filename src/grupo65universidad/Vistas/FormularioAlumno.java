@@ -1,5 +1,6 @@
 package grupo65universidad.Vistas;
 
+import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -52,6 +55,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jLDocumento.setText("Documento");
 
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -60,7 +64,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jLApellido.setText("Apellido");
 
+        jTApellido.setEditable(false);
+
         jLNombre.setText("Nombre");
+
+        jTNombre.setEditable(false);
 
         jLEstado.setText("Estado");
 
@@ -113,19 +121,19 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jRBEstado)
+                                .addGap(40, 40, 40)
+                                .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jTDocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                                     .addComponent(jTApellido)
                                     .addComponent(jTNombre))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBBuscar)
-                                .addGap(23, 23, 23))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jRBEstado)
-                                .addGap(40, 40, 40)
-                                .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGap(59, 59, 59))))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBNuevo)
@@ -140,16 +148,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jBBuscar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBBuscar))
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLApellido)
                     .addComponent(jTApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,7 +197,17 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        
+        Alumno alumno=new Alumno();
+        AlumnoDAO alumnoDao = new AlumnoDAO();
+        //buscarxDni(alumno,dni);
+        int dni=Integer.parseInt(jTDocumento.getText());
+        try {
+            
+            alumno=alumnoDao.buscarListaAlumnoxDni(dni);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -234,65 +249,16 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     }
 
-    private void eliminadologico() {
-        //falta poner estado en false
+    private void eliminadologico(Alumno alumno) {
+        
+        
         limpiar();
     }
 
-    private void guardar(Connection dbC) { //to do
-        try {
-            int dni = Integer.parseInt(jTDocumento.getText());
-            String apellido = jTApellido.getText();
-            String nombre = jTNombre.getText();
-            if(jDCHFechaNacimiento.getDate()!=null){
-            LocalDate fechaN= jDCHFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        DateTimeFormatter dtf=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        //jDChFechanacimiento.s("Fecha : "+fechaN.format(dtf));
-        }
-            Boolean estado = jRBEstado.getIgnoreRepaint();
-            Alumno alumno = new Alumno();
-            String sql = "insert into alumno (dni,apellido,nombre,fechaNacimiento,estado) values (alumno)";
-            PreparedStatement ps = dbC.prepareStatement(sql);
-            int filas = ps.executeUpdate();
-
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Alumno agregado exitosamente");
-                ps.close();
-            }
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Ingresa datos validos" + ex.getMessage());
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de conexion" + ex.getMessage());
-        }
-
+    private void buscarxDni(Alumno alumno,int dni) { 
+    //buscarListaAlumnoxDni();
     }
+        
 
-    private void buscar(Connection dbC) {
-        try {
-            int dni = Integer.parseInt(jTDocumento.getText());
-            boolean alumnoEncontrado = false;
-            String sql = "select*from alumno ";
-            PreparedStatement ps = dbC.prepareStatement(sql);
-            ResultSet resultado = ps.executeQuery();
-            while (resultado.next());
-            System.out.println("Id" + resultado.getInt("IdAlumno"));
-            System.out.println("DNI" + resultado.getInt("dni"));
-            System.out.println("Apellido" + resultado.getString("apellido"));
-            System.out.println("Nombre" + resultado.getString("nombre"));
-            System.out.println("Fecha de nacimiento" + resultado.getDate("fechaNacimiento"));
-            System.out.println("---------------------------------------------");
-            Alumno alumno = new Alumno();
-            alumnoEncontrado = true;
-            if (!alumnoEncontrado) {
-                JOptionPane.showMessageDialog(this, "Alumno no encontrado");
-            }
-            ps.close();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Ingresa datos validos");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error de conexion" + ex.getMessage());
-        }
-
-    }
+    
 }

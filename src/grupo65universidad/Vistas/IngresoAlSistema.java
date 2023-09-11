@@ -1,6 +1,8 @@
 
 package grupo65universidad.Vistas;
 
+import grupo65universidad.Entidades.Alumno;
+
 
 public class IngresoAlSistema extends javax.swing.JFrame {
 
@@ -9,6 +11,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
      */
     public IngresoAlSistema() {
         initComponents();
+        //Alumno alumno=new Alumno();
     }
 
     /**
