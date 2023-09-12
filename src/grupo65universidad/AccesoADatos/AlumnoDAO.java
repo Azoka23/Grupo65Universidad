@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
 public class AlumnoDAO extends DAO {
 
@@ -70,10 +71,13 @@ public class AlumnoDAO extends DAO {
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         try {
 //JOptionPane.showMessageDialog(null, dni);
-            String sql = "SELECT * FROM alumnos"
-                    + "WHERE dni=?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, dni);
+            String sql = "SELECT * FROM alumnos "
+                    + " WHERE dni= "+dni;
+            conectarBase();
+            //PreparedStatement ps = conexion.prepareStatement(sql);
+                    
+            //JOptionPane.showMessageDialog(null, ps);
+            //ps.setInt(1, dni);
             consultarBase(sql);
             //JOptionPane.showMessageDialog(null, );
             Alumno alumno =null;
