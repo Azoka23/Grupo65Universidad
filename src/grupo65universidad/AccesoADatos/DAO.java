@@ -23,6 +23,7 @@ public class DAO {
         try {
             Class.forName(DRIVER);
             conexion = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+            JOptionPane.showMessageDialog(null, "conexion exitosa");
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al conectarse");
         }
@@ -63,6 +64,7 @@ public class DAO {
     protected void consultarBase(String sql){
     try{
     conectarBase();
+    JOptionPane.showMessageDialog(null, "Estamos despues de conectar la base");
     sentencia=conexion.createStatement();
     resultado=sentencia.executeQuery(sql);
     }catch(Exception e){

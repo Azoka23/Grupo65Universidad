@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JOptionPane;
 
 public class AlumnoDAO extends DAO {
 
@@ -68,13 +69,14 @@ public class AlumnoDAO extends DAO {
 
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         try {
-
+//JOptionPane.showMessageDialog(null, dni);
             String sql = "SELECT * FROM alumnos"
                     + "WHERE dni=?";
             PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, dni);
             consultarBase(sql);
-            Alumno alumno = null;
+            //JOptionPane.showMessageDialog(null, );
+            Alumno alumno =null;
             //Collection<Alumno> alumnos = new ArrayList();
             while (resultado.next()) {//armamos el alumno
                 alumno = new Alumno();
@@ -83,7 +85,9 @@ public class AlumnoDAO extends DAO {
                 alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
                 alumno.setEstado(resultado.getBoolean("estado"));
                 //alumnos.add(alumno);
+                
             }
+            
             desconectarBase();
             return alumno;
         } catch (Exception e) {
