@@ -286,5 +286,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         //jbGuardar.setEnabled(editar);
         //jbEliminar.setEnabled(editar);
     }
-    
+    private void guardar(){
+      AlumnoDAO alumnoD=new AlumnoDAO() ;
+      Alumno alumno=new Alumno();
+      int documento=Integer.parseInt(jTDocumento.getText());
+      String apellido=jTApellido.getText();
+      String nombre=jTNombre.getText();
+      LocalDate fechaNacimiento=jDCHFechaNacimiento.getDate();
+      
+      
+   alumnoD.guardarAlumno(alumno);
+    }
 }
