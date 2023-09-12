@@ -21,6 +21,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
      */
     public FormularioAlumno() {
         initComponents();
+        editarAlumno(false);
     }
 
     /**
@@ -196,21 +197,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        Alumno alumno = new Alumno();
-        AlumnoDAO alumnoDao = new AlumnoDAO();
-
-        int dni = Integer.parseInt(jTDocumento.getText());
-        try {
-             alumno=null;
-            alumno = alumnoDao.buscarListaAlumnoxDni(dni);
-            System.out.println(alumno);
-            jTApellido.setText(alumno.getApellido());
-            jTNombre.setText(alumno.getNombre());
-            jDCHFechaNacimiento.setDate(Date.valueOf(alumno.getFechaNacimiento()));
-            jRBEstado.setSelected(alumno.isEstado());
-        } catch (Exception ex) {
-            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        if(jTDocumento.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Debes escribir un documento");
+            
+        }else{
+           buscarxDni(); 
         }
+        
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -257,8 +250,41 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         limpiar();
     }
 
-    private void buscarxDni(Alumno alumno, int dni) {
-        //buscarListaAlumnoxDni();
+    private void buscarxDni() {
+        Alumno alumno = new Alumno();
+        AlumnoDAO alumnoDao = new AlumnoDAO();
+
+        int dni = Integer.parseInt(jTDocumento.getText());
+        try {
+            alumno = null;
+            alumno = alumnoDao.buscarListaAlumnoxDni(dni);
+            System.out.println(alumno);
+            jTApellido.setText(alumno.getApellido());
+            jTNombre.setText(alumno.getNombre());
+            jDCHFechaNacimiento.setDate(Date.valueOf(alumno.getFechaNacimiento()));
+            jRBEstado.setSelected(alumno.isEstado());
+        } catch (Exception ex) {
+            Logger.getLogger(FormularioAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    
+    
+   
+   private void editarAlumno(boolean editar) {
+
+        jTDocumento.setEditable(true);
+
+        jTApellido.setEditable(editar);
+
+        jTNombre.setEditable(editar);
+        jDCHFechaNacimiento.setEnabled(editar);
+        jRBEstado.setEnabled(editar);
+        //jcRubro.setEnabled(editar);
+        // jtStock.setEditable(editar);
+
+        //jbGuardar.setEnabled(editar);
+        //jbEliminar.setEnabled(editar);
+    }
+    
 }
