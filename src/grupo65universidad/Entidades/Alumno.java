@@ -1,7 +1,5 @@
 package grupo65universidad.Entidades;
 
-
-
 import java.time.LocalDate;
 
 public class Alumno {
@@ -12,7 +10,6 @@ public class Alumno {
     private String nombre;
     private LocalDate fechaNacimiento;
     private boolean estado;
-    
 
     public Alumno(int idAlumno, int dni, String apellido,
             String nombre, LocalDate fechaNacimiento,
@@ -87,7 +84,8 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", estado=" + estado + '}';
+        return "dni=" + dni + ", " + apellido + ", " + nombre;
+
     }
 
 }
