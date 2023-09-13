@@ -5,9 +5,9 @@ import grupo65universidad.Entidades.Inscripcion;
 import grupo65universidad.Entidades.Materia;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
-
 
 public class InscripcionDAO extends DAO {
 
@@ -26,7 +26,7 @@ public class InscripcionDAO extends DAO {
             preparedStatement.setInt(2, inscripcion.getIdAlumno().getIdAlumno());
             preparedStatement.setInt(3, inscripcion.getIdMateria().getIdMateria());
 
-            insertarModificarEliminar(sql);
+            insertarModificarEliminar(preparedStatement);
 
         } catch (Exception e) {
             throw e;
@@ -47,7 +47,7 @@ public class InscripcionDAO extends DAO {
             preparedStatement.setInt(2, inscripcion.getIdAlumno().getIdAlumno());
             preparedStatement.setInt(3, inscripcion.getIdMateria().getIdMateria());
             preparedStatement.setInt(4, inscripcion.getIdInscripto());
-            insertarModificarEliminar(sql);
+            insertarModificarEliminar(preparedStatement);
 
         } catch (Exception e) {
             throw e;
@@ -62,7 +62,7 @@ public class InscripcionDAO extends DAO {
             String sql = "DELETE FROM inscripciones WHERE idInscripto=?";
             PreparedStatement preparedStatement = conexion.prepareStatement(sql);
             preparedStatement.setInt(1, idInscripto);
-            insertarModificarEliminar(sql);
+            insertarModificarEliminar(preparedStatement);
 
         } catch (Exception e) {
             throw e;
@@ -112,4 +112,64 @@ public class InscripcionDAO extends DAO {
         }
     }
 
+    public Collection<Inscripcion> listarMateriasInscriptasxAlumno() throws Exception {
+        // Crear una instancia de EmpleadoDAO
+
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        // Crear una instancia de HerramientaDAO
+        MateriaDAO materiaDAO = new MateriaDAO();
+
+        try {
+
+            String sql = "SELECT  FROM alumnos a JOIN incripciones i ON(a.idAlumno=i.idAlumno) "
+                    + "JOIN materias m ON (i.idMateria=m.idMateria)";
+ try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            ResultSet resultado = consultarBase(preparedStatement);
+            Collection<Alumno> alumnos = new ArrayList<>();
+//            consultarBase(sql);
+
+            Inscripcion inscripcion = null;
+            Collection<Inscripcion> inscripciones = new ArrayList();
+
+            while (resultado.next()) {
+
+                inscripcion = new Inscripcion();
+
+                inscripcion.setIdInscripto(resultado.getInt("idInscripto"));
+                inscripcion.setNota(resultado.getInt("nota"));
+
+                int idAlumno = resultado.getInt("idAlumno");
+                int idMateria = resultado.getInt("idMateria");
+
+                //otra forma es hacerlo mas robusto cambiando el contructor y instanciarlo en el main
+                Alumno alumno = alumnoDAO.obtenerAlumnoPorId(idAlumno);
+                Materia materia = materiaDAO.obtenerMateriaPorId(idMateria);
+
+                inscripcion.setIdAlumno(alumno);
+                inscripcion.setIdMateria(materia);
+
+                inscripciones.add(inscripcion);
+            }
+            return inscripciones;
+
+        } catch (Exception e) {
+            desconectarBase();
+            throw e;
+        }
+    }
+
+    public Collection<Materia> materiasInscriptas() {
+        ArrayList<Materia> listaMaterias = new ArrayList<>();
+
+       
+        "SELECT  FROM alumnos a JOIN incripciones i ON(a.idAlumno=i.idAlumno)
+   JOIN materias m ON (i.idMateria = m.idMateria
+    
+
+    )"
+    }
+    
+    
+    public Collection<Materia> materiasNoInscriptas() {
+    }
 }
