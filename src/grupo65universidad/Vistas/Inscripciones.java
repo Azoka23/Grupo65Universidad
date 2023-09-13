@@ -1,17 +1,36 @@
-
 package grupo65universidad.Vistas;
 
+import grupo65universidad.AccesoADatos.AlumnoDAO;
+import grupo65universidad.Entidades.Alumno;
+import java.awt.List;
+import java.util.ArrayList;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 
 public class Inscripciones extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        
+        public boolean isCellEditable(int fila,int columna){
+            return false;
+        }
+    };
     /**
      * Creates new form Inscripciones
      */
     public Inscripciones() {
         initComponents();
         armarCabecera();
+        try {
+            cargarCombo();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -34,18 +53,25 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jBAnularInscripcion = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(102, 153, 0));
+        setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
         setTitle("Formulario de Inscripcion");
 
+        jLSeleccionAlumno.setForeground(new java.awt.Color(255, 255, 255));
         jLSeleccionAlumno.setText("Seleccione un alumno :");
 
+        jLListadoMaterias.setForeground(new java.awt.Color(255, 255, 255));
         jLListadoMaterias.setText("Listado de Materias");
 
+        jRBMInscriptas.setBackground(new java.awt.Color(0, 51, 51));
+        jRBMInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jRBMInscriptas.setText("Materias Inscriptas");
 
+        jRBMNoInscriptas.setBackground(new java.awt.Color(0, 51, 51));
+        jRBMNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jRBMNoInscriptas.setText("Materias no Inscriptas");
 
+        TablaMaterias.setForeground(new java.awt.Color(255, 255, 255));
         TablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -129,7 +155,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBAnularInscripcion;
     private javax.swing.JButton jBInscribir;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JComboBox<String> jCBSeleccionAlumno;
+    private javax.swing.JComboBox<Alumno> jCBSeleccionAlumno;
     private javax.swing.JLabel jLListadoMaterias;
     private javax.swing.JLabel jLSeleccionAlumno;
     private javax.swing.JRadioButton jRBMInscriptas;
@@ -137,18 +163,20 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-private DefaultTableModel modelo=new DefaultTableModel()
-{public boolean isCellEditable(int fila,int columna){
-return true;//o return false
-// o if(columna==2){}
-}
-};
+//    private DefaultTableModel modelo = new DefaultTableModel() {
+//        public boolean isCellEditable(int fila, int columna) {
+//            return true;//o return false
+//// o if(columna==2){}
+//        }
+//    };
 
-private void armarCabecera(){
-modelo.addColumn("Id");
-modelo.addColumn("Nombre");
-modelo.addColumn("Año");
-}
+    private void armarCabecera() {
+        //TablaMaterias.addColumn(aColumn);
+        modelo.addColumn("Id");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Year");
+              TablaMaterias.setModel(modelo);
+    }
 
 //lista de productos por rubro
 //private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -176,5 +204,24 @@ modelo.addColumn("Año");
 //        }
 //
 //    }                                            
+    private void cargarCombo() throws ClassNotFoundException, SQLException {
 
+        AlumnoDAO alumnoDao = new AlumnoDAO();
+
+        Collection<Alumno> alumnos;
+        alumnos = new ArrayList<>();
+
+        try {
+            alumnos = alumnoDao.listarAlumnos();
+        } catch (Exception ex) {
+            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Llena el JComboBox con los valores del enum Categoria
+        //JComboBox tiene que ser tipo Categoria
+        
+        for (Alumno alumno : alumnos) {
+            jCBSeleccionAlumno.addItem(alumno);
+        }
+    }
 }
