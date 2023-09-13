@@ -1,102 +1,124 @@
 package grupo65universidad.AccesoADatos;
 
 import grupo65universidad.Entidades.Alumno;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.sql.ResultSet;
+
 
 public class AlumnoDAO extends DAO {
 
+    public AlumnoDAO() throws ClassNotFoundException, SQLException {
+        conectarBase();
+    }
+
     public void guardarAlumno(Alumno alumno) throws Exception {
-        try {
-            if (alumno == null) {
-                throw new Exception("Debes indicar un alumno");
-            }
-            String sql = "INSERT INTO alumnos (dni,apellido,nombre,fechaNacimiento,estado)"
-                    + "VALUES (?,?,?,?,?)";
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, alumno.getDni());
-            ps.setString(2, alumno.getApellido());
-            ps.setString(3, alumno.getNombre());
-            ps.setDate(4, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setBoolean(5, alumno.isEstado());
-            insertarModificarEliminar(sql);
-        } catch (Exception e) {
-            throw e;
+        validarAlumno(alumno);
+
+        String sql = "INSERT INTO alumnos (dni, apellido, nombre, fechaNacimiento, estado) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setInt(1, alumno.getDni());
+            preparedStatement.setString(2, alumno.getApellido());
+            preparedStatement.setString(3, alumno.getNombre());
+            preparedStatement.setDate(4, java.sql.Date.valueOf(alumno.getFechaNacimiento()));
+            preparedStatement.setBoolean(5, alumno.isEstado());
+
+            insertarModificarEliminar(preparedStatement);
         }
     }
 
     public void modificarAlumno(Alumno alumno) throws Exception {
-        try {
-            if (alumno == null) {
-                throw new Exception("Debes indicar un alumno");
-            }
+        validarAlumno(alumno);
 
-            String sql = "UPDATE alumnos SET (apellido=?,nombre=?,fechaNacimiento=?,estado=?)"
-                    + " WHERE dni=?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
+        String sql = "UPDATE alumnos SET apellido=?, nombre=?, fechaNacimiento=? WHERE dni=?";
 
-            ps.setString(1, alumno.getApellido());
-            ps.setString(2, alumno.getNombre());
-            ps.setDate(3, Date.valueOf(alumno.getFechaNacimiento()));
-            ps.setBoolean(4, alumno.isEstado());
-            ps.setInt(5, alumno.getDni());
-            insertarModificarEliminar(sql);
-        } catch (Exception e) {
-            throw e;
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setString(1, alumno.getApellido());
+            preparedStatement.setString(2, alumno.getNombre());
+            preparedStatement.setDate(3, java.sql.Date.valueOf(alumno.getFechaNacimiento()));
+            preparedStatement.setInt(4, alumno.getDni());
+
+            insertarModificarEliminar(preparedStatement);
         }
     }
 
-    public  void eliminarAlumnoLogico(Alumno alumno) throws Exception {
-        try {
-            if (alumno == null) {
-                throw new Exception("Debes indicar un alumno");
-            }
-            String sql = "UPDATE alumnos SET (estado=?)"
-                    + " WHERE dni=?";
-            PreparedStatement ps = conexion.prepareStatement(sql);
+    public void eliminarLogico(int dni) throws Exception {
+        String sql = "UPDATE alumnos SET estado=? WHERE dni=?";
 
-            ps.setBoolean(1, false);
-            ps.setInt(2, alumno.getDni());
-            insertarModificarEliminar(sql);
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setBoolean(1, false);
+            preparedStatement.setInt(2, dni);
 
-        } catch (Exception e) {
-            throw e;
+            insertarModificarEliminar(preparedStatement);
         }
     }
 
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
-        try {
-//JOptionPane.showMessageDialog(null, dni);
-            String sql = "SELECT * FROM alumnos "
-                    + " WHERE dni= "+dni;
-            conectarBase();
-            //PreparedStatement ps = conexion.prepareStatement(sql);
-                    
-            //JOptionPane.showMessageDialog(null, ps);
-            //ps.setInt(1, dni);
-            consultarBase(sql);
-            //JOptionPane.showMessageDialog(null, );
-            Alumno alumno =null;
-            //Collection<Alumno> alumnos = new ArrayList();
-            while (resultado.next()) {//armamos el alumno
-                alumno = new Alumno();
-                alumno.setApellido(resultado.getString("apellido"));
-                alumno.setNombre(resultado.getString("nombre"));
-                alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
-                alumno.setEstado(resultado.getBoolean("estado"));
-                //alumnos.add(alumno);
-                
+        String sql = "SELECT * FROM `alumnos` WHERE dni=?";
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setInt(1, dni);
+
+            ResultSet resultado = consultarBase(preparedStatement);
+            Alumno alumno = null;
+
+            if (resultado.next()) {
+                alumno = obtenerAlumnoDesdeResultado(resultado);
             }
-            
-            desconectarBase();
+
             return alumno;
-        } catch (Exception e) {
-            throw e;
         }
     }
 
+    public Alumno obtenerAlumnoPorId(int idAlumno) throws Exception {
+        String sql = "SELECT * FROM `alumnos` WHERE idAlumno=?";
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            preparedStatement.setInt(1, idAlumno);
+
+            ResultSet resultado = consultarBase(preparedStatement);
+            Alumno alumno = null;
+
+            if (resultado.next()) {
+                alumno = obtenerAlumnoDesdeResultado(resultado);
+            }
+
+            return alumno;
+        }
+    }
+
+    public Collection<Alumno> listarAlumnos() throws Exception {
+        String sql = "SELECT * FROM `alumnos`";
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            ResultSet resultado = consultarBase(preparedStatement);
+            Collection<Alumno> alumnos = new ArrayList<>();
+
+            while (resultado.next()) {
+                alumnos.add(obtenerAlumnoDesdeResultado(resultado));
+            }
+
+            return alumnos;
+        }
+    }
+
+    private void validarAlumno(Alumno alumno) throws Exception {
+        if (alumno == null) {
+            throw new Exception("Debe indicar un Alumno");
+        }
+    }
+
+    private Alumno obtenerAlumnoDesdeResultado(ResultSet resultado) throws SQLException {
+        Alumno alumno = new Alumno();
+        alumno.setIdAlumno(resultado.getInt("idAlumno"));
+        alumno.setDni(resultado.getInt("dni"));
+        alumno.setApellido(resultado.getString("apellido"));
+        alumno.setNombre(resultado.getString("nombre"));
+        alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
+        alumno.setEstado(resultado.getBoolean("estado"));
+        return alumno;
+    }
 }
