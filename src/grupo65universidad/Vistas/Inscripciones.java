@@ -1,29 +1,32 @@
 package grupo65universidad.Vistas;
 
 import grupo65universidad.AccesoADatos.AlumnoDAO;
+import grupo65universidad.AccesoADatos.InscripcionDAO;
 import grupo65universidad.Entidades.Alumno;
-import java.awt.List;
-import java.util.ArrayList;
+import grupo65universidad.Entidades.Materia;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Inscripciones extends javax.swing.JInternalFrame {
-    private DefaultTableModel modelo = new DefaultTableModel(){
-        
-        public boolean isCellEditable(int fila,int columna){
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int fila, int columna) {
             return false;
         }
     };
+
     /**
      * Creates new form Inscripciones
      */
     public Inscripciones() {
         initComponents();
         armarCabecera();
+        jRBMNoInscriptas.setSelected(true);
         try {
             cargarCombo();
         } catch (ClassNotFoundException ex) {
@@ -60,18 +63,34 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jLSeleccionAlumno.setForeground(new java.awt.Color(255, 255, 255));
         jLSeleccionAlumno.setText("Seleccione un alumno :");
 
+        jCBSeleccionAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBSeleccionAlumnoActionPerformed(evt);
+            }
+        });
+
         jLListadoMaterias.setForeground(new java.awt.Color(255, 255, 255));
         jLListadoMaterias.setText("Listado de Materias");
 
         jRBMInscriptas.setBackground(new java.awt.Color(0, 51, 51));
         jRBMInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jRBMInscriptas.setText("Materias Inscriptas");
+        jRBMInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBMInscriptasActionPerformed(evt);
+            }
+        });
 
         jRBMNoInscriptas.setBackground(new java.awt.Color(0, 51, 51));
         jRBMNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
         jRBMNoInscriptas.setText("Materias no Inscriptas");
+        jRBMNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBMNoInscriptasActionPerformed(evt);
+            }
+        });
 
-        TablaMaterias.setForeground(new java.awt.Color(255, 255, 255));
+        TablaMaterias.setForeground(new java.awt.Color(0, 0, 0));
         TablaMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -149,6 +168,54 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jRBMNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMNoInscriptasActionPerformed
+        Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+        jRBMInscriptas.setSelected(false);
+        jRBMNoInscriptas.setSelected(true);
+
+        try {
+            modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
+            cargarTabla(selectedAlumno.getIdAlumno());
+        } catch (Exception ex) {
+            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jRBMNoInscriptasActionPerformed
+
+    private void jRBMInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMInscriptasActionPerformed
+               Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+        jRBMInscriptas.setSelected(true);
+        jRBMNoInscriptas.setSelected(false);
+        try {
+            modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
+            cargarTabla(selectedAlumno.getIdAlumno());
+        } catch (Exception ex) {
+            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+
+    }//GEN-LAST:event_jRBMInscriptasActionPerformed
+
+    private void jCBSeleccionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSeleccionAlumnoActionPerformed
+                Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+        if (selectedAlumno != null) {
+            // Realiza la carga de la tabla según el ítem seleccionado
+            // Por ejemplo, llama a un método cargarTabla(selectedItem)
+            //JOptionPane.showMessageDialog(null, "Por favor seleccione una fila");
+            modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
+            try {
+                cargarTabla(selectedAlumno.getIdAlumno());
+            } catch (Exception ex) {
+                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jCBSeleccionAlumnoActionPerformed
+
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaMaterias;
@@ -163,47 +230,14 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-//    private DefaultTableModel modelo = new DefaultTableModel() {
-//        public boolean isCellEditable(int fila, int columna) {
-//            return true;//o return false
-//// o if(columna==2){}
-//        }
-//    };
-
     private void armarCabecera() {
         //TablaMaterias.addColumn(aColumn);
         modelo.addColumn("Id");
         modelo.addColumn("Nombre");
         modelo.addColumn("Year");
-              TablaMaterias.setModel(modelo);
+        TablaMaterias.setModel(modelo);
     }
 
-//lista de productos por rubro
-//private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {                                             
-//        borrarFilas();
-//        String valor = String.valueOf(jcbCategoria.getSelectedItem());
-//        String valor2 = null;
-//
-//        Categoria catseleccionada = (Categoria) jcbCategoria.getSelectedItem();
-//
-//        for (Producto producto : Menuprincipal.listaProductos) {
-//
-//            valor2 = String.valueOf(producto.getRubro());
-//
-//            if (valor.equals(valor2)) {
-//
-//                modelo.addRow(new Object[]{
-//                    producto.getCodigo(),
-//                    producto.getDescripcion(),
-//                    producto.getPrecio(),
-//                    producto.getStock()
-//                });
-//
-//            }
-//
-//        }
-//
-//    }                                            
     private void cargarCombo() throws ClassNotFoundException, SQLException {
 
         AlumnoDAO alumnoDao = new AlumnoDAO();
@@ -219,9 +253,30 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
         // Llena el JComboBox con los valores del enum Categoria
         //JComboBox tiene que ser tipo Categoria
-        
         for (Alumno alumno : alumnos) {
             jCBSeleccionAlumno.addItem(alumno);
         }
     }
+
+    private void cargarTabla(int idAlumno) throws Exception {
+        //listaProductos.add(new Producto(25, "Jabon", 250.25, 5, Rubro.Limpieza));
+        //JOptionPane.showMessageDialog(null, idAlumno);
+        InscripcionDAO cursadas = new InscripcionDAO();
+        Collection<Materia> listaMaterias = new ArrayList<>(); // Inicialización predeterminada
+
+        if (jRBMInscriptas.isSelected() && !jRBMNoInscriptas.isSelected()) {
+            listaMaterias = cursadas.obtenerMateriaCursada(idAlumno);
+        } else if (!jRBMInscriptas.isSelected() && jRBMNoInscriptas.isSelected()) {
+            listaMaterias = cursadas.obtenerMateriaNOCursada(idAlumno);
+        }
+
+        for (Materia tipo : listaMaterias) {
+
+            modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), tipo.getAnio()});
+
+        }
+        //modelo.addRow(new Object[]{producto.getNombre(), producto.getCategoria(), producto.getPrecio()});
+
+    }
+
 }

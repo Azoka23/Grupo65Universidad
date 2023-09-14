@@ -1,14 +1,13 @@
 package grupo65universidad.AccesoADatos;
 
-import grupo65universidad.Entidades.Materia;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import grupo65universidad.Entidades.Materia;
 
-
-
+import grupo65universidad.Entidades.Materia;
 
 public class MateriaDAO extends DAO {
 
@@ -17,13 +16,11 @@ public class MateriaDAO extends DAO {
     }
 
     public void guardarMateria(Materia materia) throws Exception {
+        validarMateria(materia);
 
-        try {
-            validarMateria(materia);
+        String sql = "INSERT INTO materias (nombre, year, estado) VALUES (?, ?, ?)";
 
-            String sql = "INSERT INTO materias (nombre, year, estado)"
-                    + "VALUES (?, ?, ?)";
-            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
 
             preparedStatement.setString(1, materia.getNombre());
             preparedStatement.setInt(2, materia.getAnio());
@@ -31,18 +28,18 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
-        } catch (Exception e) {
-            throw e;
+//        } catch (Exception e) {
+//            throw e;
         }
     }
 
     public void modificarMateria(Materia materia) throws Exception {
+        validarMateria(materia);
 
-        try {
-            validarMateria(materia);
+        String sql = "UPDATE materias SET nombre=?, year=? WHERE idMateria=?";
 
-            String sql = "UPDATE materias SET nombre=?, year=? WHERE idMateria=?";
-            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            //PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
             preparedStatement.setString(1, materia.getNombre());
             preparedStatement.setInt(2, materia.getAnio());
@@ -51,8 +48,8 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
-        } catch (Exception e) {
-            throw e;
+//        } catch (Exception e) {
+//            throw e;
         }
 
     }
@@ -60,28 +57,26 @@ public class MateriaDAO extends DAO {
     public void eliminarLogico(int codigo) throws Exception {
         String sql = "UPDATE materias SET estado=? WHERE idMateria=?";
 
-        try {
-
-            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, false);
             preparedStatement.setInt(2, codigo);
 
             insertarModificarEliminar(preparedStatement);
 
-        } catch (Exception e) {
-            throw e;
+//        } catch (Exception e) {
+//            throw e;
         }
 
     }
 
     public Materia buscarListaMateriaxDni(int idMateria) throws Exception {
         String sql = "SELECT * FROM `materias` WHERE idMateria=?";
-        try {
 
-            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idMateria);
 
-            ResultSet resultado = consultarBase(preparedStatement);
+            //ResultSet 
+            resultado = consultarBase(preparedStatement);
             //consultarBase(sql);
             Materia materia = null;
 
@@ -91,52 +86,47 @@ public class MateriaDAO extends DAO {
             }
             return materia;
 
-        } catch (Exception e) {
-            desconectarBase();
-            throw e;
+//        } catch (Exception e) {
+//            desconectarBase();
+//            throw e;
         }
     }
+
     public Materia obtenerMateriaPorId(int idMateria) throws Exception {
-        String sql = "SELECT * FROM `alumnos` WHERE idAlumno=?";
+        String sql = "SELECT * FROM `materias` WHERE idMateria=?";
+
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idMateria);
-
-            ResultSet resultado = consultarBase(preparedStatement);
+            //JOptionPane.showMessageDialog(null, resultado+"antes de consultar");
+            //ResultSet 
+            resultado = consultarBase(preparedStatement);
+            // JOptionPane.showMessageDialog(null, resultado+"despues de consultar");
             Materia materia = null;
 
             if (resultado.next()) {
+
                 materia = obtenerMateriaDesdeResultado(resultado);
+
             }
 
             return materia;
         }
     }
+
     public Collection<Materia> listarMaterias() throws Exception {
+        String sql = "SELECT * FROM `materias`";
+        //Materia materia = null;
 
-        try {
-
-            String sql = "SELECT * FROM `materias`";
-            consultarBase(sql);
-            Materia materia = null;
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
+            //ResultSet 
+            resultado = consultarBase(preparedStatement);
             Collection<Materia> materias = new ArrayList();
 
             while (resultado.next()) {
-
-                materia = new Materia();
-
-                materia.setIdMateria(resultado.getInt("idMateria"));
-                materia.setNombre(resultado.getString("nombre"));
-                materia.setAnio(resultado.getInt("year"));
-                materia.setEstado(resultado.getBoolean("estado"));
-
-                materias.add(materia);
-
+                materias.add(obtenerMateriaDesdeResultado(resultado));
             }
-            return materias;
 
-        } catch (Exception e) {
-            desconectarBase();
-            throw e;
+            return materias;
         }
     }
 
@@ -146,14 +136,15 @@ public class MateriaDAO extends DAO {
         }
     }
 
-    private Materia obtenerMateriaDesdeResultado(ResultSet resultado) throws SQLException {
+    private Materia obtenerMateriaDesdeResultado(ResultSet result) throws SQLException {
 
         Materia materia = new Materia();
+        //JOptionPane.showMessageDialog(null, result);
+        materia.setIdMateria(result.getInt("idMateria"));
 
-        materia.setIdMateria(resultado.getInt("idMateria"));
-        materia.setNombre(resultado.getString("nombre"));
-        materia.setAnio(resultado.getInt("year"));
-        materia.setEstado(resultado.getBoolean("estado"));
+        materia.setNombre(result.getString("nombre"));
+        materia.setAnio(result.getInt("year"));
+        materia.setEstado(result.getBoolean("estado"));
 
         return materia;
     }

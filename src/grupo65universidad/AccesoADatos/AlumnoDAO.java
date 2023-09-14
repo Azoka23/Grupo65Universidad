@@ -1,15 +1,11 @@
 package grupo65universidad.AccesoADatos;
 
-import grupo65universidad.Entidades.Alumno;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
+import grupo65universidad.Entidades.Alumno;
 
 public class AlumnoDAO extends DAO {
 
@@ -61,10 +57,12 @@ public class AlumnoDAO extends DAO {
 
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         String sql = "SELECT * FROM `alumnos` WHERE dni=?";
+        
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, dni);
 
-            ResultSet resultado = consultarBase(preparedStatement);
+            //ResultSet 
+                    resultado = consultarBase(preparedStatement);
             Alumno alumno = null;
 
             if (resultado.next()) {
@@ -80,7 +78,8 @@ public class AlumnoDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idAlumno);
 
-            ResultSet resultado = consultarBase(preparedStatement);
+            //ResultSet 
+                    resultado = consultarBase(preparedStatement);
             Alumno alumno = null;
 
             if (resultado.next()) {
@@ -94,7 +93,8 @@ public class AlumnoDAO extends DAO {
     public Collection<Alumno> listarAlumnos() throws Exception {
         String sql = "SELECT * FROM `alumnos`";
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-            ResultSet resultado = consultarBase(preparedStatement);
+            //ResultSet 
+                    resultado = consultarBase(preparedStatement);
             Collection<Alumno> alumnos = new ArrayList<>();
 
             while (resultado.next()) {
@@ -111,14 +111,14 @@ public class AlumnoDAO extends DAO {
         }
     }
 
-    private Alumno obtenerAlumnoDesdeResultado(ResultSet resultado) throws SQLException {
+    private Alumno obtenerAlumnoDesdeResultado(ResultSet result) throws SQLException {
         Alumno alumno = new Alumno();
-        alumno.setIdAlumno(resultado.getInt("idAlumno"));
-        alumno.setDni(resultado.getInt("dni"));
-        alumno.setApellido(resultado.getString("apellido"));
-        alumno.setNombre(resultado.getString("nombre"));
-        alumno.setFechaNacimiento(resultado.getDate("fechaNacimiento").toLocalDate());
-        alumno.setEstado(resultado.getBoolean("estado"));
+        alumno.setIdAlumno(result.getInt("idAlumno"));
+        alumno.setDni(result.getInt("dni"));
+        alumno.setApellido(result.getString("apellido"));
+        alumno.setNombre(result.getString("nombre"));
+        alumno.setFechaNacimiento(result.getDate("fechaNacimiento").toLocalDate());
+        alumno.setEstado(result.getBoolean("estado"));
         return alumno;
     }
 }
