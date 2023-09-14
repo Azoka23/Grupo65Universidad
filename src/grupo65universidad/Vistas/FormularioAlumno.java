@@ -11,8 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import universidadejemplo.AccesoADatos.AlumnoDAO;
-import universidadejemplo.Entidades.Alumno;
+import grupo65universidad.AccesoADatos.AlumnoDAO;
+import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import javax.swing.JButton;
 
