@@ -254,7 +254,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void salirAplicacion() {
         int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro que quieres salir?", "Salir de la aplicacion", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-            System.exit(0);//cierra la aplicacion
+            //System.exit(0);//cierra la aplicacion
+             dispose();
         }
     }
 

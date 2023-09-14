@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Inscripciones extends javax.swing.JInternalFrame {
@@ -109,6 +110,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jBAnularInscripcion.setText("Anular Inscripcion");
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,7 +188,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBMNoInscriptasActionPerformed
 
     private void jRBMInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBMInscriptasActionPerformed
-               Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+        Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
         jRBMInscriptas.setSelected(true);
         jRBMNoInscriptas.setSelected(false);
         try {
@@ -191,15 +197,12 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
+
 
     }//GEN-LAST:event_jRBMInscriptasActionPerformed
 
     private void jCBSeleccionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSeleccionAlumnoActionPerformed
-                Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+        Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
         if (selectedAlumno != null) {
             // Realiza la carga de la tabla según el ítem seleccionado
             // Por ejemplo, llama a un método cargarTabla(selectedItem)
@@ -213,8 +216,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jCBSeleccionAlumnoActionPerformed
 
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
-
+        salirAplicacion();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -279,4 +284,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
     }
 
+    private void salirAplicacion() {
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estas seguro que quieres salir?", "Salir de la aplicacion", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            //System.exit(0);//cierra la aplicacion
+            dispose();
+        }
+    }
 }
