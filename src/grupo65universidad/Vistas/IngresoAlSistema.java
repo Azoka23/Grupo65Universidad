@@ -107,7 +107,7 @@ private boolean passwordVisible = false; // Variable de estado para rastrear la 
 
         jlBienvenida.setBackground(new java.awt.Color(0, 75, 102));
         jlBienvenida.setFont(new java.awt.Font("Academy Engraved LET", 1, 18)); // NOI18N
-        jlBienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/design-pencil-ruler-grid-guide_108596.png"))); // NOI18N
+        jlBienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/32officeicons-31_89708.png"))); // NOI18N
         jlBienvenida.setText("      BIENVENIDO AL SISTEMA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
