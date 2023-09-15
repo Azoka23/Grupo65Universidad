@@ -231,7 +231,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-      salirAplicacion();
+       dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
 

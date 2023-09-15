@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 public class DAO {
 
+    protected int filasAfectadas;
     protected Connection conexion = null;
     protected ResultSet resultado = null;
     protected Statement sentencia = null;
@@ -78,20 +79,20 @@ public class DAO {
             return resultado;
         } catch (SQLException e) {
             //e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No encontro el DNI");
+            JOptionPane.showMessageDialog(null, "No encontro");
             return null; // Devuelve null en caso de error
         }
     }
 
-    protected void insertarModificarEliminar(PreparedStatement preparedStatement) throws ClassNotFoundException {
+    protected void insertarModificarEliminar(PreparedStatement preparedStatement) throws ClassNotFoundException ,SQLException {
         try {
 
             // En su lugar, ejecuta la PreparedStatement que recibiste como argumento
-            preparedStatement.executeUpdate();
+           filasAfectadas= preparedStatement.executeUpdate();
 
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "No se ejecuto");
+//        } catch (SQLException ex) {
+//
+//            JOptionPane.showMessageDialog(null, "No se ejecuto");
 
         } finally {
             desconectarBase();

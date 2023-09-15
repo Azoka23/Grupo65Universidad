@@ -98,6 +98,11 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.add(jManejoInscripciones);
 
         jManipulacionNotas.setText("Manipulacion de Notas");
+        jManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jManipulacionNotasActionPerformed(evt);
+            }
+        });
         jMenu3.add(jManipulacionNotas);
 
         jMenuBar1.add(jMenu3);
@@ -105,11 +110,21 @@ public class Menu extends javax.swing.JFrame {
         jMenu5.setText("Consultas");
 
         jConsultasMaterias.setText("Alumnos por Materia");
+        jConsultasMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultasMateriasActionPerformed(evt);
+            }
+        });
         jMenu5.add(jConsultasMaterias);
 
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Salir");
+        jMenu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu6ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -170,6 +185,37 @@ public class Menu extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jDatosMateriasActionPerformed
+
+    private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
+
+
+            jEscritorio.removeAll();
+        jEscritorio.repaint();
+
+        ActualizacionNotas cargarNotas = new ActualizacionNotas();
+        cargarNotas.setVisible(true);
+        jEscritorio.add(cargarNotas);
+        jEscritorio.moveToFront(cargarNotas);
+    }//GEN-LAST:event_jManipulacionNotasActionPerformed
+
+    private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
+
+
+            jEscritorio.removeAll();
+        jEscritorio.repaint();
+
+        ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
+        alumnosxMateria.setVisible(true);
+        jEscritorio.add(alumnosxMateria);
+        jEscritorio.moveToFront(alumnosxMateria);
+    }//GEN-LAST:event_jConsultasMateriasActionPerformed
+
+    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+
+ dispose();  
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu6ActionPerformed
 
     /**
      * @param args the command line arguments

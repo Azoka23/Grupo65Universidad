@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import grupo65universidad.Entidades.Materia;//corregir
+import grupo65universidad.Entidades.Materia;
 
 import grupo65universidad.Entidades.Materia;
 
