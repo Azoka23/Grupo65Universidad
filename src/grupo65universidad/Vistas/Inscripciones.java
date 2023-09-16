@@ -67,7 +67,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Formulario de Inscripcion");
 
-        jLSeleccionAlumno.setForeground(new java.awt.Color(255, 255, 255));
+        jLSeleccionAlumno.setForeground(new java.awt.Color(0, 0, 0));
         jLSeleccionAlumno.setText("Seleccione un alumno :");
 
         jCBSeleccionAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -76,11 +76,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jLListadoMaterias.setForeground(new java.awt.Color(255, 255, 255));
+        jLListadoMaterias.setForeground(new java.awt.Color(0, 0, 0));
         jLListadoMaterias.setText("Listado de Materias");
 
         jRBMInscriptas.setBackground(new java.awt.Color(0, 51, 51));
-        jRBMInscriptas.setForeground(new java.awt.Color(255, 255, 255));
+        jRBMInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jRBMInscriptas.setText("Materias Inscriptas");
         jRBMInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +89,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         });
 
         jRBMNoInscriptas.setBackground(new java.awt.Color(0, 51, 51));
-        jRBMNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
+        jRBMNoInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jRBMNoInscriptas.setText("Materias no Inscriptas");
         jRBMNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

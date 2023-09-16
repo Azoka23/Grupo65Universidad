@@ -189,7 +189,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Carga de notas");
 
-        jLSeleccionarAlumno.setForeground(new java.awt.Color(255, 255, 255));
+        jLSeleccionarAlumno.setForeground(new java.awt.Color(0, 0, 0));
         jLSeleccionarAlumno.setText("Seleccione un alumno");
 
         jCBSeleccionarAlumno.addActionListener(new java.awt.event.ActionListener() {

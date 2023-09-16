@@ -58,7 +58,7 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Listado de alumnos por materia");
 
-        jLSeleccionarMateria.setForeground(new java.awt.Color(255, 255, 255));
+        jLSeleccionarMateria.setForeground(new java.awt.Color(0, 0, 0));
         jLSeleccionarMateria.setText("Seleccione una materia");
 
         jCBSeleccionarMateria.addActionListener(new java.awt.event.ActionListener() {

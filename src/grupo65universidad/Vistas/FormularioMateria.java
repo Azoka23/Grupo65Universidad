@@ -59,7 +59,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Materia");
 
-        jLCodigo.setForeground(new java.awt.Color(255, 255, 255));
+        jLCodigo.setForeground(new java.awt.Color(0, 0, 0));
         jLCodigo.setText("   Codigo");
 
         jBBuscar.setText("Buscar");
@@ -97,15 +97,15 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             }
         });
 
-        jLNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jLNombre.setForeground(new java.awt.Color(0, 0, 0));
         jLNombre.setText("  Nombre");
 
-        jLAño.setForeground(new java.awt.Color(255, 255, 255));
+        jLAño.setForeground(new java.awt.Color(0, 0, 0));
         jLAño.setText("  Año");
 
         jRBEstado.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLEstado.setForeground(new java.awt.Color(255, 255, 255));
+        jLEstado.setForeground(new java.awt.Color(0, 0, 0));
         jLEstado.setText("Estado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

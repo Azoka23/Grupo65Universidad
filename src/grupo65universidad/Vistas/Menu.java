@@ -154,8 +154,7 @@ public class Menu extends javax.swing.JFrame {
         cargarAlumnoProbandoVista.setVisible(true);
         jEscritorio.add(cargarAlumnoProbandoVista);
         jEscritorio.moveToFront(cargarAlumnoProbandoVista);
-
-
+       
     }//GEN-LAST:event_jDatosAlumnosActionPerformed
 
     private void jConultaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConultaEmpleadoActionPerformed

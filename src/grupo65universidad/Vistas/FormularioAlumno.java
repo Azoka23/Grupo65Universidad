@@ -15,6 +15,8 @@ import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import javax.swing.JButton;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
@@ -26,6 +28,9 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     public FormularioAlumno() {
         initComponents();
         setTitle("Cargar Alumno");
+        // Establecer el foco en jTDocumento
+        jTDocumento.requestFocusInWindow();
+        
         editarAlumno(false);
     }
 
@@ -52,9 +57,12 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
         setTitle("Alumno");
+        setVisible(true);
 
-        jLDocumento.setForeground(new java.awt.Color(255, 255, 255));
+        jLDocumento.setForeground(new java.awt.Color(0, 0, 0));
         jLDocumento.setText("Documento");
+
+        jTDocumento.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,22 +71,22 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jLApellido.setForeground(new java.awt.Color(255, 255, 255));
+        jLApellido.setForeground(new java.awt.Color(0, 0, 0));
         jLApellido.setText("Apellido");
 
         jTApellido.setEditable(false);
 
-        jLNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jLNombre.setForeground(new java.awt.Color(0, 0, 0));
         jLNombre.setText("Nombre");
 
         jTNombre.setEditable(false);
 
-        jLEstado.setForeground(new java.awt.Color(255, 255, 255));
+        jLEstado.setForeground(new java.awt.Color(0, 0, 0));
         jLEstado.setText("Estado");
 
         jRBEstado.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLFechaNacimiento.setForeground(new java.awt.Color(255, 255, 255));
+        jLFechaNacimiento.setForeground(new java.awt.Color(0, 0, 0));
         jLFechaNacimiento.setText("Fecha de Nacimiento");
 
         jBNuevo.setText("Nuevo");
@@ -118,8 +126,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLFechaNacimiento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,14 +183,15 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jRBEstado))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLFechaNacimiento)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLFechaNacimiento)
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBNuevo)
+                            .addComponent(jBEliminar)
+                            .addComponent(jBGuardar)
+                            .addComponent(jBSalir)))
                     .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBNuevo)
-                    .addComponent(jBEliminar)
-                    .addComponent(jBGuardar)
-                    .addComponent(jBSalir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
