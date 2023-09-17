@@ -199,6 +199,9 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TablaMateriasMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Inscripciones_TablaMaterias"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

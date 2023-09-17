@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -34,7 +36,8 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
     private Alumno selectedAlumno = null;
     private int idMateria = 0;
     private int idAlumno = 0;
-    //private int firstName = 0;
+    private Map<Integer, Integer> notasModificadas = new HashMap<>();
+
 // Define una variable de instancia para almacenar el valor original de la celda
     private int originalNota = 0;
 // Define una variable de instancia para almacenar el valor actual de la celda
@@ -44,8 +47,8 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         public boolean isCellEditable(int fila, int columna) {
 
             // Habilitar la edición solo en la tercera columna (columna índice 2)
-            return columna == 2;
-            //return false;
+            //return columna == 2;
+            return false;
         }
     };
 
@@ -58,9 +61,9 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         try {
             cargarCombo();
         } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "erro, driver " + ex);
+            JOptionPane.showMessageDialog(this, "erro, driver " + ex);
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "error,sql " + ex);
+            JOptionPane.showMessageDialog(this, "error,sql " + ex);
         }
 ////        // Agregar un oyente para manejar la edición de celdas
 ////        jTNotas.addMouseListener(new MouseAdapter() {
@@ -116,15 +119,18 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         jTNotas.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int selectedRow = jTNotas.getSelectedRow();
-                int selectedColumn = jTNotas.getSelectedColumn();
 
-                if (selectedRow != -1 && selectedColumn == 2) {
-                    int originalValue = (int) jTNotas.getValueAt(selectedRow, selectedColumn);
-                    // Obtener idMateria de la columna 0
-                    idMateria = (int) jTNotas.getValueAt(selectedRow, 0);
-                    // Mostrar el JSpinner con el valor original y idMateria
-                    showSpinner(originalValue, selectedRow, selectedColumn, idMateria);
+                if (evt.getClickCount() == 1) {
+                    int selectedRow = jTNotas.getSelectedRow();
+                    int selectedColumn = jTNotas.getSelectedColumn();
+
+                    if (selectedRow != -1 && selectedColumn == 2) {
+                        int originalValue = (int) jTNotas.getValueAt(selectedRow, selectedColumn);
+                        // Obtener idMateria de la columna 0
+                        idMateria = (int) jTNotas.getValueAt(selectedRow, 0);
+                        // Mostrar el JSpinner con el valor original y idMateria
+                        showSpinner(originalValue, selectedRow, selectedColumn, idMateria);
+                    }
                 }
             }
         });
@@ -149,13 +155,9 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int newValue = (int) spinner.getValue();
-                currentNota=newValue;
+                notasModificadas.put(idMateria, newValue);
                 // Actualizar la celda en la tabla con el nuevo valor
                 jTNotas.setValueAt(newValue, row, column);
-//                // También tienes acceso a idMateria aquí
-//                JOptionPane.showMessageDialog(null, "idMateria: " + idMateria);
-
-                // Cerrar el diálogo
                 dialog.dispose();
             }
         });
@@ -165,7 +167,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         dialog.add(guardarButton);
 
         // Mostrar el diálogo centrado
-        dialog.setLocationRelativeTo(null);
+        dialog.setLocationRelativeTo(this);
         dialog.setVisible(true);
     }
 
@@ -274,51 +276,40 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();
+       salirAplicacion();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jCBSeleccionarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSeleccionarAlumnoActionPerformed
         selectedAlumno = (Alumno) jCBSeleccionarAlumno.getSelectedItem();
-//        flagCombo = true;
         if (selectedAlumno != null) {
             // Realiza la carga de la tabla según el ítem seleccionado
             // Por ejemplo, llama a un método cargarTabla(selectedItem)
-            //JOptionPane.showMessageDialog(null, "Por favor seleccione una fila");
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             try {
                 idAlumno = selectedAlumno.getIdAlumno();
                 cargarTabla(selectedAlumno.getIdAlumno());
             } catch (Exception ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error: " + ex);
             }
         }
     }//GEN-LAST:event_jCBSeleccionarAlumnoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-// Si el valor actual es igual al valor original, no realizar la operación de guardado
-//        if (currentNota == originalNota) {
-//            //System.out.println("La nota no ha cambiado. No se realizará el guardado.");
-//            JOptionPane.showMessageDialog(null, "La nota no ha cambiado. No se realizara el guardado.");
-//        } else {
-            // Realiza la operación de guardado porque la nota ha cambiado
-            //System.out.println("Valor de la nota modificada: " + currentNota);
-            // Llama a tu método de guardar y pasa currentNota como parámetro
-            // guardarValorNota(currentNota);
-
-            try {
-                InscripcionDAO actualizarNota = null;
-                actualizarNota = new InscripcionDAO();
-                //JOptionPane.showMessageDialog(null, "no se rompe");
-                //JOptionPane.showMessageDialog(null, idAlumno + "--" + idMateria + "--" + currentNota);
-                actualizarNota.actualizarNota(idAlumno, idMateria, currentNota);
-                originalNota = currentNota; // Actualiza el valor original después del guardado
-                //JOptionPane.showMessageDialog(null, "Guardado exitosamente.");
-            } catch (Exception ex) {
-               JOptionPane.showMessageDialog(null, "error "+ex);
+        try {
+            InscripcionDAO actualizarNota = null;
+            actualizarNota = new InscripcionDAO();
+            for (Map.Entry<Integer, Integer> entry : notasModificadas.entrySet()) {
+                int idMateria = entry.getKey();
+                int nuevaNota = entry.getValue();
+                jTNotas.setValueAt(nuevaNota, getRowIndexForMateria(idMateria), 2);
+                actualizarNota.actualizarNota(idAlumno, idMateria, nuevaNota, this);
             }
-        //}
-
+            notasModificadas.clear(); // Limpiar el mapa después de guardar
+            originalNota = currentNota; // Actualiza el valor original después del guardado
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "error " + ex);
+        }
 
     }//GEN-LAST:event_jBGuardarActionPerformed
 
@@ -336,6 +327,14 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTNotas;
     // End of variables declaration//GEN-END:variables
+private int getRowIndexForMateria(int idMateria) {
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            if ((int) modelo.getValueAt(i, 0) == idMateria) {
+                return i;
+            }
+        }
+        return -1; // Materia no encontrada en la tabla
+    }
 
     private void armarCabecera() {
         modelo.addColumn("Codigo");
@@ -345,20 +344,14 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
     }
 
     private void cargarCombo() throws ClassNotFoundException, SQLException {
-
         AlumnoDAO alumnoDao = new AlumnoDAO();
-
         Collection<Alumno> alumnos;
         alumnos = new ArrayList<>();
-
         try {
             alumnos = alumnoDao.listarAlumnos();
         } catch (Exception ex) {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        // Llena el JComboBox con los valores del enum Categoria
-        //JComboBox tiene que ser tipo Categoria
         for (Alumno alumno : alumnos) {
             jCBSeleccionarAlumno.addItem(alumno);
         }
@@ -366,24 +359,33 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
 
     private void cargarTabla(int idAlumno) throws Exception {
         int nota;
-        //JOptionPane.showMessageDialog(null, idAlumno);
         InscripcionDAO cursadas = new InscripcionDAO();
         Collection<Materia> listaMaterias = new ArrayList<>(); // Inicialización predeterminada
-
-        //if (jRBMInscriptas.isSelected() && !jRBMNoInscriptas.isSelected()) {
         listaMaterias = cursadas.obtenerMateriaCursada(idAlumno);
-        // } else if (!jRBMInscriptas.isSelected() && jRBMNoInscriptas.isSelected()) {
-        //    listaMaterias = cursadas.obtenerMateriaNOCursada(idAlumno);
-        // }
-
         for (Materia tipo : listaMaterias) {
-
-            //JOptionPane.showMessageDialog(null, idAlumno+"--"+tipo.getIdMateria());
             nota = cursadas.buscarNota(idAlumno, tipo.getIdMateria());
             modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), nota});
-
         }
-        //modelo.addRow(new Object[]{producto.getNombre(), producto.getCategoria(), producto.getPrecio()});
+    }
+    
+        private void salirAplicacion() {
+        if (confirmarSalida()) {
+            dispose();
+        }
+    }
 
+    private boolean confirmarSalida() {
+        int confirmacion = JOptionPane.showOptionDialog(
+                this,
+                "¿Estás seguro que quieres salir de la aplicación?",
+                "Salir de la aplicación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Sí", "No"},
+                "No" // Botón por defecto
+        );
+
+        return confirmacion == JOptionPane.YES_OPTION;
     }
 }

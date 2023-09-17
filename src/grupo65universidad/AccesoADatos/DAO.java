@@ -1,4 +1,5 @@
 package grupo65universidad.AccesoADatos;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,9 +26,9 @@ public class DAO {
         try {
             Class.forName(DRIVER);
             conexion = DriverManager.getConnection(URL + DB + "?useSSL=false&serverTimezone=UTC", USUARIO, PASSWORD);
-           
+
         } catch (ClassNotFoundException | SQLException ex) {
- 
+
             throw ex;
         }
     }
@@ -48,30 +49,6 @@ public class DAO {
         }
     }
 
-    protected void insertarModificarEliminar(String sql) throws ClassNotFoundException {
-        try {
-            conectarBase();
-            sentencia = conexion.createStatement();
-            sentencia.executeUpdate(sql);
-        } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Ejecucion satisfactoria");
-
-        } finally {
-            desconectarBase();
-        }
-    }
-
-    protected void consultarBase(String sql) {
-        try {
-            conectarBase();
-            sentencia = conexion.createStatement();
-            resultado = sentencia.executeQuery(sql);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "consulta exitosa");
-        }
-    }
-
     protected ResultSet consultarBase(PreparedStatement preparedStatement) {
         try {
             // Ejecutar la consulta
@@ -84,18 +61,16 @@ public class DAO {
         }
     }
 
-    protected void insertarModificarEliminar(PreparedStatement preparedStatement) throws ClassNotFoundException ,SQLException {
+    protected void insertarModificarEliminar(PreparedStatement preparedStatement) throws ClassNotFoundException, SQLException {
         try {
-
+      
+            conectarBase();
             // En su lugar, ejecuta la PreparedStatement que recibiste como argumento
-           filasAfectadas= preparedStatement.executeUpdate();
+            filasAfectadas = preparedStatement.executeUpdate();
 
-//        } catch (SQLException ex) {
-//
-//            JOptionPane.showMessageDialog(null, "No se ejecuto");
+        } catch (SQLException ex) {
 
-        } finally {
-            desconectarBase();
+            JOptionPane.showMessageDialog(null, "No se ejecuto");
         }
     }
 

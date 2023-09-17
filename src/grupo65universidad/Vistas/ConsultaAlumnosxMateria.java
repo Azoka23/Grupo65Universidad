@@ -3,10 +3,8 @@ package grupo65universidad.Vistas;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.AccesoADatos.InscripcionDAO;
 import grupo65universidad.AccesoADatos.MateriaDAO;
 import grupo65universidad.Entidades.Alumno;
@@ -17,6 +15,8 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
     private Materia selectedMateria = null;
     private int idMateria = 0;
     private int idAlumno = 0;
+    private MateriaDAO materiaDao;
+    private InscripcionDAO inscripcionDao;
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int fila, int columna) {
@@ -30,12 +30,15 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
     public ConsultaAlumnosxMateria() {
         try {
             initComponents();
-            armarCabecera();
+            materiaDao = new MateriaDAO();
+            inscripcionDao = new InscripcionDAO();
+
+           armarCabecera();
             cargarCombo();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConsultaAlumnosxMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "error: " + ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ConsultaAlumnosxMateria.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "error: " + ex);
         }
     }
 
@@ -128,17 +131,13 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
     private void jCBSeleccionarMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSeleccionarMateriaActionPerformed
 
         selectedMateria = (Materia) jCBSeleccionarMateria.getSelectedItem();
-//        flagCombo = true;
         if (selectedMateria != null) {
-            // Realiza la carga de la tabla según el ítem seleccionado
-            // Por ejemplo, llama a un método cargarTabla(selectedItem)
-            //JOptionPane.showMessageDialog(null, "Por favor seleccione una fila");
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             try {
                 idMateria = selectedMateria.getIdMateria();
                 cargarTabla(selectedMateria.getIdMateria());
             } catch (Exception ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error: " + ex);
             }
         }
 
@@ -146,7 +145,7 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jCBSeleccionarMateriaActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();          // TODO add your handling code here:
+        salirAplicacion();
     }//GEN-LAST:event_jBSalirActionPerformed
 
 
@@ -168,39 +167,47 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
 
     private void cargarCombo() throws ClassNotFoundException, SQLException {
 
-        MateriaDAO materiaDao = new MateriaDAO();
-
-        Collection<Materia> materias;
-        materias = new ArrayList<>();
-
         try {
-            materias = materiaDao.listarMaterias();
+            Collection<Materia> materias = materiaDao.listarMaterias();
+            for (Materia materia : materias) {
+                jCBSeleccionarMateria.addItem(materia);
+            }
         } catch (Exception ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // Llena el JComboBox con los valores del enum Categoria
-        //JComboBox tiene que ser tipo Categoria
-        for (Materia materia : materias) {
-            jCBSeleccionarMateria.addItem(materia);
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
     }
 
     private void cargarTabla(int idMateria) throws Exception {
-        //listaProductos.add(new Producto(25, "Jabon", 250.25, 5, Rubro.Limpieza));
-        //JOptionPane.showMessageDialog(null, idAlumno);
-        InscripcionDAO cursadas = new InscripcionDAO();
-        Collection<Alumno> listaAlumno = new ArrayList<>(); // Inicialización predeterminada
-
-        //listaMaterias = cursadas.obtenerMateriaCursada(idMateria);
-        listaAlumno = cursadas.obtenerAlumnoxMateria(idMateria);
-
-        for (Alumno tipo : listaAlumno) {
-
-            modelo.addRow(new Object[]{tipo.getIdAlumno(), tipo.getDni(), tipo.getApellido(), tipo.getNombre()});
-
+        try {
+            Collection<Alumno> listaAlumno = inscripcionDao.obtenerAlumnoxMateria(idMateria);
+            modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
+            for (Alumno alumno : listaAlumno) {
+                modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
-        //modelo.addRow(new Object[]{producto.getNombre(), producto.getCategoria(), producto.getPrecio()});
 
+    }
+
+    private void salirAplicacion() {
+        if (confirmarSalida()) {
+            dispose();
+        }
+    }
+
+    private boolean confirmarSalida() {
+        int confirmacion = JOptionPane.showOptionDialog(
+                this,
+                "¿Estás seguro que quieres salir de la aplicación?",
+                "Salir de la aplicación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Sí", "No"},
+                "No" // Botón por defecto
+        );
+
+        return confirmacion == JOptionPane.YES_OPTION;
     }
 }

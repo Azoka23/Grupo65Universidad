@@ -28,8 +28,6 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
-//        } catch (Exception e) {
-//            throw e;
         }
     }
 
@@ -39,7 +37,6 @@ public class MateriaDAO extends DAO {
         String sql = "UPDATE materias SET nombre=?, year=? WHERE idMateria=?";
 
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-            //PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
             preparedStatement.setString(1, materia.getNombre());
             preparedStatement.setInt(2, materia.getAnio());
@@ -47,9 +44,6 @@ public class MateriaDAO extends DAO {
             preparedStatement.setInt(3, materia.getIdMateria());
 
             insertarModificarEliminar(preparedStatement);
-
-//        } catch (Exception e) {
-//            throw e;
         }
 
     }

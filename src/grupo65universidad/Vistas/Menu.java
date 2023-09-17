@@ -154,7 +154,7 @@ public class Menu extends javax.swing.JFrame {
         cargarAlumnoProbandoVista.setVisible(true);
         jEscritorio.add(cargarAlumnoProbandoVista);
         jEscritorio.moveToFront(cargarAlumnoProbandoVista);
-       
+
     }//GEN-LAST:event_jDatosAlumnosActionPerformed
 
     private void jConultaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConultaEmpleadoActionPerformed
@@ -187,8 +187,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
-
-            jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
 
         ActualizacionNotas cargarNotas = new ActualizacionNotas();
@@ -199,8 +198,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
-
-            jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
 
         ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
@@ -211,7 +209,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
 
- dispose();  
+        System.exit(0);//cierra la aplicacion  
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu6ActionPerformed
@@ -241,6 +239,18 @@ public class Menu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
