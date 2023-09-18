@@ -174,73 +174,100 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscripcionesActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
 
-        Inscripciones cargarIncrpcion = new Inscripciones();
-        cargarIncrpcion.setLocation(200,10);
-        //int frameWidth = cargarIncrpcion.getWidth();
-        //int frameHeight = cargarIncrpcion.getHeight();
-        //int x = (frameWidth) / 2;
-        //int y = (frameHeight) / 2;
-        //cargarIncrpcion.setLocation(x, y);
-        cargarIncrpcion.setVisible(true);
-        jEscritorio.add(cargarIncrpcion);
-        jEscritorio.moveToFront(cargarIncrpcion);
-        
+//jEscritorio.removeAll();
+//jEscritorio.repaint();
+//
+//Inscripciones cargarIncrpcion = new Inscripciones();
+//jEscritorio.add(cargarIncrpcion);
+//cargarIncrpcion.setVisible(true);
+//
+//// Traer el JInternalFrame al frente y darle enfoque
+//cargarIncrpcion.toFront();
+//cargarIncrpcion.requestFocus();
+jEscritorio.removeAll();
+jEscritorio.repaint();
+
+Inscripciones cargarIncrpcion = new Inscripciones();
+
+// Configurar el tamaño del JInternalFrame
+cargarIncrpcion.setSize(500, 500);
+
+// Calcular el centro del JDesktopPane
+int x = (jEscritorio.getWidth() - cargarIncrpcion.getWidth()) / 2;
+int y = (jEscritorio.getHeight() - cargarIncrpcion.getHeight()) / 2;
+
+// Establecer la ubicación y agregar el JInternalFrame
+cargarIncrpcion.setBounds(x, y, cargarIncrpcion.getWidth(), cargarIncrpcion.getHeight());
+jEscritorio.add(cargarIncrpcion);
+cargarIncrpcion.setVisible(true);
     }//GEN-LAST:event_jManejoInscripcionesActionPerformed
 
     private void jDatosMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosMateriasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+      
 
-        FormularioMateria cargarMateria = new FormularioMateria();
-        cargarMateria.setLocation(200,70);
-        //int frameWidth = cargarMateria.getWidth();
-        //int frameHeight = cargarMateria.getHeight();
-        //int x = (frameWidth) / 2;
-        //int y = (frameHeight) / 2;
-        //cargarMateria.setLocation(x, y);
-        cargarMateria.setVisible(true);
-        jEscritorio.add(cargarMateria);
-        jEscritorio.moveToFront(cargarMateria);
 
+jEscritorio.removeAll();
+jEscritorio.repaint();
+
+FormularioMateria cargarMateria = new FormularioMateria();
+
+// Configurar el tamaño del JInternalFrame
+cargarMateria.setSize(400, 300);
+
+// Calcular el centro del JDesktopPane
+int x = (jEscritorio.getWidth() - cargarMateria.getWidth()) / 2;
+int y = (jEscritorio.getHeight() - cargarMateria.getHeight()) / 2;
+
+// Establecer la ubicación y agregar el JInternalFrame
+cargarMateria.setBounds(x, y, cargarMateria.getWidth(), cargarMateria.getHeight());
+jEscritorio.add(cargarMateria);
+cargarMateria.setVisible(true);
 
     }//GEN-LAST:event_jDatosMateriasActionPerformed
 
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
 
-        ActualizacionNotas cargarNotas = new ActualizacionNotas();
-        cargarNotas.setLocation(200,50);
-        //int frameWidth = cargarNotas.getWidth();
-        //int frameHeight = cargarNotas.getHeight();
-        //int x = (frameWidth) / 2;
-        //int y = (frameHeight) / 2;
-        //cargarNotas.setLocation(x, y);
-        cargarNotas.setVisible(true);
-        jEscritorio.add(cargarNotas);
-        jEscritorio.moveToFront(cargarNotas);
+jEscritorio.removeAll();
+jEscritorio.repaint();
+
+ActualizacionNotas cargarNotas = new ActualizacionNotas();
+
+// Configurar el tamaño del JInternalFrame
+cargarNotas.setSize(500, 500);
+
+// Calcular el centro del JDesktopPane
+int x = (jEscritorio.getWidth() - cargarNotas.getWidth()) / 2;
+int y = (jEscritorio.getHeight() - cargarNotas.getHeight()) / 2;
+
+// Establecer la ubicación y agregar el JInternalFrame
+cargarNotas.setBounds(x, y, cargarNotas.getWidth(), cargarNotas.getHeight());
+jEscritorio.add(cargarNotas);
+cargarNotas.setVisible(true);
+
     }//GEN-LAST:event_jManipulacionNotasActionPerformed
 
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
 
-        ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
-        alumnosxMateria.setLocation(200, 50);
-//int frameWidth = alumnosxMateria.getWidth();
-        //int frameHeight = alumnosxMateria.getHeight();
-        //int x = (frameWidth) / 2;
-        //int y = (frameHeight) / 2;
-        //alumnosxMateria.setLocation(x, y);
-        alumnosxMateria.setVisible(true);
-        jEscritorio.add(alumnosxMateria);
-        jEscritorio.moveToFront(alumnosxMateria);
+jEscritorio.removeAll();
+jEscritorio.repaint();
+
+ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
+
+// Configurar el tamaño del JInternalFrame
+alumnosxMateria.setSize(400, 300);
+
+// Calcular el centro del JDesktopPane
+int x = (jEscritorio.getWidth() - alumnosxMateria.getWidth()) / 2;
+int y = (jEscritorio.getHeight() - alumnosxMateria.getHeight()) / 2;
+
+// Establecer la ubicación y agregar el JInternalFrame
+alumnosxMateria.setBounds(x, y, alumnosxMateria.getWidth(), alumnosxMateria.getHeight());
+jEscritorio.add(alumnosxMateria);
+alumnosxMateria.setVisible(true);
 
     }//GEN-LAST:event_jConsultasMateriasActionPerformed
 
@@ -254,17 +281,25 @@ public class Menu extends javax.swing.JFrame {
 
     private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
-        FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
-        int frameWidth = cargarAlumnoProbandoVista.getWidth();
-        int frameHeight = cargarAlumnoProbandoVista.getHeight();
-        int x = (frameWidth) / 2;
-        int y = (frameHeight) / 2;
-        cargarAlumnoProbandoVista.setLocation(x, y);
-        cargarAlumnoProbandoVista.setVisible(true);
-        jEscritorio.add(cargarAlumnoProbandoVista);
-        jEscritorio.moveToFront(cargarAlumnoProbandoVista);
+
+
+                                             
+    jEscritorio.removeAll();
+    jEscritorio.repaint();
+    FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
+    
+    // Configurar el tamaño del JInternalFrame
+    cargarAlumnoProbandoVista.setSize(400, 300);
+    
+    // Calcular el centro del JDesktopPane
+    int x = (jEscritorio.getWidth() - cargarAlumnoProbandoVista.getWidth()) / 2;
+    int y = (jEscritorio.getHeight() - cargarAlumnoProbandoVista.getHeight()) / 2;
+    
+    // Establecer la ubicación y agregar el JInternalFrame
+    cargarAlumnoProbandoVista.setBounds(x, y, cargarAlumnoProbandoVista.getWidth(), cargarAlumnoProbandoVista.getHeight());
+    jEscritorio.add(cargarAlumnoProbandoVista);
+    cargarAlumnoProbandoVista.setVisible(true);
+
 
     }//GEN-LAST:event_jDatosAlumnosActionPerformed
 
@@ -298,6 +333,10 @@ public class Menu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
