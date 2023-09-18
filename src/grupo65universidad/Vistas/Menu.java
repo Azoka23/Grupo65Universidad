@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,34 +37,46 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jEscritorio = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMAlumno = new javax.swing.JMenu();
         jDatosAlumnos = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMMateria = new javax.swing.JMenu();
         jDatosMaterias = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMAdministracion = new javax.swing.JMenu();
         jManejoInscripciones = new javax.swing.JMenuItem();
         jManipulacionNotas = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMConsulta = new javax.swing.JMenu();
         jConsultasMaterias = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
+        jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jEscritorio.setBackground(new java.awt.Color(0, 51, 51));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
+
+        jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
         jEscritorioLayout.setHorizontalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 831, Short.MAX_VALUE)
+            .addGroup(jEscritorioLayout.createSequentialGroup()
+                .addGap(297, 297, 297)
+                .addComponent(jLabel1)
+                .addContainerGap(303, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(jEscritorioLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Alumno");
+        jMAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/student_man_avatar_user_toga_school_university_icon_209294_1.png"))); // NOI18N
+        jMAlumno.setText("Alumno");
 
         jDatosAlumnos.setText("Formulario Alumno");
         jDatosAlumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -71,11 +84,12 @@ public class Menu extends javax.swing.JFrame {
                 jDatosAlumnosActionPerformed(evt);
             }
         });
-        jMenu1.add(jDatosAlumnos);
+        jMAlumno.add(jDatosAlumnos);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMAlumno);
 
-        jMenu2.setText("Materia");
+        jMMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/education_books_library_icon_149685.png"))); // NOI18N
+        jMMateria.setText("Materia");
 
         jDatosMaterias.setText("Formulario Materia");
         jDatosMaterias.addActionListener(new java.awt.event.ActionListener() {
@@ -83,11 +97,12 @@ public class Menu extends javax.swing.JFrame {
                 jDatosMateriasActionPerformed(evt);
             }
         });
-        jMenu2.add(jDatosMaterias);
+        jMMateria.add(jDatosMaterias);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMMateria);
 
-        jMenu3.setText("Administracion");
+        jMAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/3700468-archive-document-education-exam-file-test_108747_1.png"))); // NOI18N
+        jMAdministracion.setText("Administracion");
 
         jManejoInscripciones.setText("Manejo de Inscripciones ");
         jManejoInscripciones.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +110,7 @@ public class Menu extends javax.swing.JFrame {
                 jManejoInscripcionesActionPerformed(evt);
             }
         });
-        jMenu3.add(jManejoInscripciones);
+        jMAdministracion.add(jManejoInscripciones);
 
         jManipulacionNotas.setText("Manipulacion de Notas");
         jManipulacionNotas.addActionListener(new java.awt.event.ActionListener() {
@@ -103,11 +118,12 @@ public class Menu extends javax.swing.JFrame {
                 jManipulacionNotasActionPerformed(evt);
             }
         });
-        jMenu3.add(jManipulacionNotas);
+        jMAdministracion.add(jManipulacionNotas);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMAdministracion);
 
-        jMenu5.setText("Consultas");
+        jMConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/support_icon-icons.com_55294.png"))); // NOI18N
+        jMConsulta.setText("Consultas");
 
         jConsultasMaterias.setText("Alumnos por Materia");
         jConsultasMaterias.addActionListener(new java.awt.event.ActionListener() {
@@ -115,17 +131,23 @@ public class Menu extends javax.swing.JFrame {
                 jConsultasMateriasActionPerformed(evt);
             }
         });
-        jMenu5.add(jConsultasMaterias);
+        jMConsulta.add(jConsultasMaterias);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMConsulta);
 
-        jMenu6.setText("Salir");
-        jMenu6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu6ActionPerformed(evt);
+        jMSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/477A86B10B034C3087ADC368774218B1.png"))); // NOI18N
+        jMSalir.setText("Salir");
+        jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMSalirMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu6);
+        jMSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMSalirActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -146,18 +168,6 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
-
-        FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
-        cargarAlumnoProbandoVista.setVisible(true);
-        jEscritorio.add(cargarAlumnoProbandoVista);
-        jEscritorio.moveToFront(cargarAlumnoProbandoVista);
-
-
-    }//GEN-LAST:event_jDatosAlumnosActionPerformed
-
     private void jConultaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConultaEmpleadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jConultaEmpleadoActionPerformed
@@ -168,9 +178,16 @@ public class Menu extends javax.swing.JFrame {
         jEscritorio.repaint();
 
         Inscripciones cargarIncrpcion = new Inscripciones();
+        cargarIncrpcion.setLocation(200,10);
+        //int frameWidth = cargarIncrpcion.getWidth();
+        //int frameHeight = cargarIncrpcion.getHeight();
+        //int x = (frameWidth) / 2;
+        //int y = (frameHeight) / 2;
+        //cargarIncrpcion.setLocation(x, y);
         cargarIncrpcion.setVisible(true);
         jEscritorio.add(cargarIncrpcion);
         jEscritorio.moveToFront(cargarIncrpcion);
+        
     }//GEN-LAST:event_jManejoInscripcionesActionPerformed
 
     private void jDatosMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosMateriasActionPerformed
@@ -179,6 +196,12 @@ public class Menu extends javax.swing.JFrame {
         jEscritorio.repaint();
 
         FormularioMateria cargarMateria = new FormularioMateria();
+        cargarMateria.setLocation(200,70);
+        //int frameWidth = cargarMateria.getWidth();
+        //int frameHeight = cargarMateria.getHeight();
+        //int x = (frameWidth) / 2;
+        //int y = (frameHeight) / 2;
+        //cargarMateria.setLocation(x, y);
         cargarMateria.setVisible(true);
         jEscritorio.add(cargarMateria);
         jEscritorio.moveToFront(cargarMateria);
@@ -188,11 +211,16 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
-
-            jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
 
         ActualizacionNotas cargarNotas = new ActualizacionNotas();
+        cargarNotas.setLocation(200,50);
+        //int frameWidth = cargarNotas.getWidth();
+        //int frameHeight = cargarNotas.getHeight();
+        //int x = (frameWidth) / 2;
+        //int y = (frameHeight) / 2;
+        //cargarNotas.setLocation(x, y);
         cargarNotas.setVisible(true);
         jEscritorio.add(cargarNotas);
         jEscritorio.moveToFront(cargarNotas);
@@ -200,22 +228,50 @@ public class Menu extends javax.swing.JFrame {
 
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
-
-            jEscritorio.removeAll();
+        jEscritorio.removeAll();
         jEscritorio.repaint();
 
         ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
+        alumnosxMateria.setLocation(200, 50);
+//int frameWidth = alumnosxMateria.getWidth();
+        //int frameHeight = alumnosxMateria.getHeight();
+        //int x = (frameWidth) / 2;
+        //int y = (frameHeight) / 2;
+        //alumnosxMateria.setLocation(x, y);
         alumnosxMateria.setVisible(true);
         jEscritorio.add(alumnosxMateria);
         jEscritorio.moveToFront(alumnosxMateria);
+
     }//GEN-LAST:event_jConsultasMateriasActionPerformed
 
-    private void jMenu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu6ActionPerformed
+    private void jMSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMSalirActionPerformed
 
- dispose();  
-
+        //dispose();
+        
+//salir();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu6ActionPerformed
+    }//GEN-LAST:event_jMSalirActionPerformed
+
+    private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
+
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
+        int frameWidth = cargarAlumnoProbandoVista.getWidth();
+        int frameHeight = cargarAlumnoProbandoVista.getHeight();
+        int x = (frameWidth) / 2;
+        int y = (frameHeight) / 2;
+        cargarAlumnoProbandoVista.setLocation(x, y);
+        cargarAlumnoProbandoVista.setVisible(true);
+        jEscritorio.add(cargarAlumnoProbandoVista);
+        jEscritorio.moveToFront(cargarAlumnoProbandoVista);
+
+    }//GEN-LAST:event_jDatosAlumnosActionPerformed
+
+    private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
+        // TODO add your handling code here:
+        salir();
+    }//GEN-LAST:event_jMSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -260,13 +316,34 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jDatosAlumnos;
     private javax.swing.JMenuItem jDatosMaterias;
     private javax.swing.JDesktopPane jEscritorio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMAdministracion;
+    private javax.swing.JMenu jMAlumno;
+    private javax.swing.JMenu jMConsulta;
+    private javax.swing.JMenu jMMateria;
+    private javax.swing.JMenu jMSalir;
     private javax.swing.JMenuItem jManejoInscripciones;
     private javax.swing.JMenuItem jManipulacionNotas;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
+
+// public static  void centrarInternalFrame(JInternalFrame internalFrame) {
+//        //int parentWidth = desktopPane.getWidth();
+//        //int parentHeight = desktopPane.getHeight();
+//        int frameWidth = internalFrame.getWidth();
+//        int frameHeight = internalFrame.getHeight();
+//        int x = ( frameWidth) / 2;
+//        int y = (frameHeight) / 2;
+//        
+//        internalFrame.setLocation(x, y);
+//        //internalFrame.setVisible(true);
+//    }
+    
+    private void salir(){
+    int respuesta=JOptionPane.showConfirmDialog(this, "Estas seguro que "
+            + "quieres salir?","Salir de la aplicacion",JOptionPane.YES_NO_OPTION);
+    if(respuesta==JOptionPane.YES_OPTION){
+    System.exit(0);
+    }
+    }
 }

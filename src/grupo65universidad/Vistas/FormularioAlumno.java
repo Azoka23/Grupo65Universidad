@@ -15,6 +15,7 @@ import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
@@ -25,6 +26,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
      */
     public FormularioAlumno() {
         initComponents();
+        
         setTitle("Cargar Alumno");
         editarAlumno(false);
     }
@@ -52,6 +54,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
         setTitle("Alumno");
+        setFocusable(false);
 
         jLDocumento.setForeground(new java.awt.Color(255, 255, 255));
         jLDocumento.setText("Documento");
@@ -369,4 +372,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-}
+        
+       
+    }
+
