@@ -15,6 +15,7 @@ import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
@@ -25,6 +26,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
      */
     public FormularioAlumno() {
         initComponents();
+        
         setTitle("Cargar Alumno");
         editarAlumno(false);
     }
@@ -52,6 +54,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
         setTitle("Alumno");
+        setFocusable(false);
 
         jLDocumento.setForeground(new java.awt.Color(255, 255, 255));
         jLDocumento.setText("Documento");
@@ -118,6 +121,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLFechaNacimiento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,8 +135,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jRBEstado)
-                                .addGap(40, 40, 40)
-                                .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -171,14 +174,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLEstado)
-                            .addComponent(jRBEstado))
-                        .addGap(7, 7, 7)
-                        .addComponent(jLFechaNacimiento))
+                    .addComponent(jLEstado)
+                    .addComponent(jRBEstado))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLFechaNacimiento)
                     .addComponent(jDCHFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBNuevo)
                     .addComponent(jBEliminar)
@@ -191,7 +193,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        salirAplicacion();
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
@@ -370,4 +372,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-}
+        
+       
+    }
+

@@ -1,18 +1,16 @@
-
 package grupo65universidad.Vistas;
 
 import grupo65universidad.Entidades.Alumno;
 import javax.swing.JOptionPane;
 
-
 public class IngresoAlSistema extends javax.swing.JFrame {
-
+private boolean passwordVisible = false; // Variable de estado para rastrear la visibilidad de la contraseña
     /**
      * Creates new form MenuPrincipal
      */
     public IngresoAlSistema() {
         initComponents();
-        
+
     }
 
     /**
@@ -31,6 +29,7 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         jTUsuario = new javax.swing.JTextField();
         jBIngresar = new javax.swing.JButton();
         jTPassword = new javax.swing.JPasswordField();
+        jLmostrar = new javax.swing.JLabel();
         jlBienvenida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +57,12 @@ public class IngresoAlSistema extends javax.swing.JFrame {
             }
         });
 
-        jTPassword.setText("jPasswordField1");
+        jLmostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/Office_-34_icon-icons.com_73983.png"))); // NOI18N
+        jLmostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLmostrarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpLoggingLayout = new javax.swing.GroupLayout(jpLogging);
         jpLogging.setLayout(jpLoggingLayout);
@@ -66,16 +70,19 @@ public class IngresoAlSistema extends javax.swing.JFrame {
             jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpLoggingLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(jTPassword))
-                .addGap(40, 40, 40)
-                .addComponent(jBIngresar)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBIngresar)
+                    .addGroup(jpLoggingLayout.createSequentialGroup()
+                        .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(jTPassword))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLmostrar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpLoggingLayout.setVerticalGroup(
             jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,22 +98,26 @@ public class IngresoAlSistema extends javax.swing.JFrame {
                     .addGroup(jpLoggingLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpLoggingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBIngresar)
-                            .addComponent(jTPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(121, Short.MAX_VALUE))
+                            .addComponent(jTPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLmostrar))))
+                .addGap(24, 24, 24)
+                .addComponent(jBIngresar)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jlBienvenida.setBackground(new java.awt.Color(0, 75, 102));
         jlBienvenida.setFont(new java.awt.Font("Academy Engraved LET", 1, 18)); // NOI18N
         jlBienvenida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/32officeicons-31_89708.png"))); // NOI18N
-        jlBienvenida.setText("                                             BIENVENIDO AL SISTEMA");
+        jlBienvenida.setText("      BIENVENIDO AL SISTEMA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLogging, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jlBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jlBienvenida, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jpLogging, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,12 +136,29 @@ public class IngresoAlSistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jTUsuarioActionPerformed
 
     private void jBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarActionPerformed
-        
+
         ingresar();
-        
+
     }//GEN-LAST:event_jBIngresarActionPerformed
 
-    /**
+    private void jLmostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLmostrarMouseClicked
+        //jTPassword.setEchoChar((char) 0);
+        
+    if (passwordVisible) {
+        // Si la contraseña está visible, ocúltala
+        jTPassword.setEchoChar('*'); // O establece cualquier otro carácter que desees para ocultar la contraseña
+    } else {
+        // Si la contraseña está oculta, muéstrala
+        jTPassword.setEchoChar((char) 0);
+    }
+    
+    // Invierte el estado
+    passwordVisible = !passwordVisible;
+
+
+    }//GEN-LAST:event_jLmostrarMouseClicked
+
+ /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -168,13 +196,14 @@ public class IngresoAlSistema extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IngresoAlSistema().setVisible(true);
-               
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBIngresar;
+    private javax.swing.JLabel jLmostrar;
     private javax.swing.JPasswordField jTPassword;
     private javax.swing.JTextField jTUsuario;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -184,23 +213,24 @@ public class IngresoAlSistema extends javax.swing.JFrame {
     private javax.swing.JPanel jpLogging;
     // End of variables declaration//GEN-END:variables
 
-public void ingresar() {
-    jTPassword.getPassword().equals(" ");
-        if (jTUsuario.getText().isEmpty() || jTPassword.getPassword().equals(" ")) {
+    public void ingresar() {
+        String usuario = jTUsuario.getText();
+        char[] passwordChars = jTPassword.getPassword();
+        String password = new String(passwordChars);
+        password.equals(null);
+        if (usuario.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
-        } else if (jTUsuario.getText().equals("ulp") && jTPassword.getPassword().equals("hola")) {
+        } else if (usuario.equals("ulp") && password.equals("hola")) {
             jpLogging.removeAll();
             jpLogging.repaint();
-            Menu is = new Menu();
-            is.setVisible(true);
-            is.setLocationRelativeTo(null);
+            Menu menu = new Menu();
+            menu.setVisible(true);
+            menu.setLocationRelativeTo(null);
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrecto");
+            JOptionPane.showMessageDialog(this, "Usuario y/o contraseña incorrectos");
             jTUsuario.setText("");
             jTPassword.setText("");
         }
-
-        }
-
     }
 
+}
