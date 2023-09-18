@@ -1,4 +1,6 @@
+
 package grupo65universidad.Entidades;
+
 
 public class Inscripcion {
 

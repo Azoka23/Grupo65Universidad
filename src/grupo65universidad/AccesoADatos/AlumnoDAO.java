@@ -50,19 +50,16 @@ public class AlumnoDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setBoolean(1, false);
             preparedStatement.setInt(2, dni);
-
             insertarModificarEliminar(preparedStatement);
         }
     }
 
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         String sql = "SELECT * FROM `alumnos` WHERE dni=?";
-        
+
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, dni);
-
-            //ResultSet 
-                    resultado = consultarBase(preparedStatement);
+            resultado = consultarBase(preparedStatement);
             Alumno alumno = null;
 
             if (resultado.next()) {
@@ -77,15 +74,11 @@ public class AlumnoDAO extends DAO {
         String sql = "SELECT * FROM `alumnos` WHERE idAlumno=?";
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idAlumno);
-
-            //ResultSet 
-                    resultado = consultarBase(preparedStatement);
+            resultado = consultarBase(preparedStatement);
             Alumno alumno = null;
-
             if (resultado.next()) {
                 alumno = obtenerAlumnoDesdeResultado(resultado);
             }
-
             return alumno;
         }
     }
@@ -93,14 +86,11 @@ public class AlumnoDAO extends DAO {
     public Collection<Alumno> listarAlumnos() throws Exception {
         String sql = "SELECT * FROM `alumnos`";
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-            //ResultSet 
-                    resultado = consultarBase(preparedStatement);
+            resultado = consultarBase(preparedStatement);
             Collection<Alumno> alumnos = new ArrayList<>();
-
             while (resultado.next()) {
                 alumnos.add(obtenerAlumnoDesdeResultado(resultado));
             }
-
             return alumnos;
         }
     }

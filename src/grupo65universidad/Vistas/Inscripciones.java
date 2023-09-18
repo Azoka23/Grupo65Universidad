@@ -10,16 +10,16 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import grupo65universidad.Entidades.Inscripcion;
 
 public class Inscripciones extends javax.swing.JInternalFrame {
 
     private Alumno selectedAlumno = null;
     private int idMateria = 0;
     private int idAlumno = 0;
-//    private boolean flagTabla = false;
-//    private boolean flagCombo = false;
+
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int fila, int columna) {
@@ -34,8 +34,28 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         jRBMNoInscriptas.setSelected(true);
+
+        // Agregar el ListSelectionListener aquí------- // Agrega un oyente de eventos de mouse a la tabla dando 1 Click
+        //o 2 click --- resulto que funcionaba pero solia fallar -- depende como uno hace el clic -- ahora
+        //pruebo el ListSelectionListener (osea cuando se encuentra seleccionada) parece que funciona bien
+        TablaMaterias.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = TablaMaterias.getSelectedRow();
+                    if (selectedRow != -1) {
+                        Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
+                        idAlumno = selectedAlumno.getIdAlumno();
+                        idMateria = (Integer) TablaMaterias.getValueAt(selectedRow, 0);
+                    }
+                }
+            }
+        });
+
         try {
             cargarCombo();
+            // Seleccionar automáticamente el primer elemento del combo
+            jCBSeleccionAlumno.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -67,7 +87,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Formulario de Inscripcion");
 
-        jLSeleccionAlumno.setForeground(new java.awt.Color(255, 255, 255));
+        jLSeleccionAlumno.setForeground(new java.awt.Color(0, 0, 0));
         jLSeleccionAlumno.setText("Seleccione un alumno :");
 
         jCBSeleccionAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -76,11 +96,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jLListadoMaterias.setForeground(new java.awt.Color(255, 255, 255));
+        jLListadoMaterias.setForeground(new java.awt.Color(0, 0, 0));
         jLListadoMaterias.setText("Listado de Materias");
 
         jRBMInscriptas.setBackground(new java.awt.Color(0, 51, 51));
-        jRBMInscriptas.setForeground(new java.awt.Color(255, 255, 255));
+        jRBMInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jRBMInscriptas.setText("Materias Inscriptas");
         jRBMInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +109,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         });
 
         jRBMNoInscriptas.setBackground(new java.awt.Color(0, 51, 51));
-        jRBMNoInscriptas.setForeground(new java.awt.Color(255, 255, 255));
+        jRBMNoInscriptas.setForeground(new java.awt.Color(0, 0, 0));
         jRBMNoInscriptas.setText("Materias no Inscriptas");
         jRBMNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,7 +224,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             cargarTabla(selectedAlumno.getIdAlumno());
         } catch (Exception ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "error" + ex);
         }
     }//GEN-LAST:event_jRBMNoInscriptasActionPerformed
 
@@ -216,7 +236,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             cargarTabla(selectedAlumno.getIdAlumno());
         } catch (Exception ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "error" + ex);
         }
 
 
@@ -224,116 +244,81 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
     private void jCBSeleccionAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBSeleccionAlumnoActionPerformed
         selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
-//        flagCombo = true;
         if (selectedAlumno != null) {
             // Realiza la carga de la tabla según el ítem seleccionado
             // Por ejemplo, llama a un método cargarTabla(selectedItem)
-            //JOptionPane.showMessageDialog(null, "Por favor seleccione una fila");
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             try {
                 idAlumno = selectedAlumno.getIdAlumno();
                 cargarTabla(selectedAlumno.getIdAlumno());
             } catch (Exception ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error" + ex);
             }
         }
     }//GEN-LAST:event_jCBSeleccionAlumnoActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-
-        dispose();        // TODO add your handling code here:
+        salirAplicacion();
+        //dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void TablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMateriasMouseClicked
-        //Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
-//        flagTabla = true;
-        int selectedRow = TablaMaterias.getSelectedRow();
 
-        if (selectedRow != -1) {
-            Alumno selectedAlumno = (Alumno) jCBSeleccionAlumno.getSelectedItem();
-            idAlumno = selectedAlumno.getIdAlumno();
-
-            idMateria = (Integer) TablaMaterias.getValueAt(selectedRow, 0);
-
-            //jtNombre.setText(firstName);//muestro JTextField
-            //editarProducto(false);
-            //mostrarSeleccion(idMateria);
-        }
     }//GEN-LAST:event_TablaMateriasMouseClicked
 
     private void jBAnularInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularInscripcionActionPerformed
-        //if (flagTabla && flagCombo) {
+
         if (idAlumno != 0 && idMateria != 0) {
             try {
                 //Anular inscripcion estando el boton inscripto true
                 InscripcionDAO inscricionDAO = new InscripcionDAO();
-
-                //idAlumno = selectedAlumno.getIdAlumno();
-                //JOptionPane.showMessageDialog(null, idAlumno+"--"+ idMateria);
                 if (jRBMInscriptas.isSelected() && !jRBMNoInscriptas.isSelected()) {
-
-                    // JOptionPane.showMessageDialog(null, idAlumno+ idMateria);
-                    inscricionDAO.borrarInscripcionMateriaAlumno(idAlumno, idMateria);
+                    inscricionDAO.borrarInscripcionMateriaAlumno(idAlumno, idMateria, this);
                     modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
-
                     cargarTabla(idAlumno);
-
                     idMateria = 0;
                     idAlumno = 0;
-//                    flagCombo = false;
-//                    flagTabla = false;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Anular la Inscripcion, solo para Materias Inscriptas");
+                    JOptionPane.showMessageDialog(this, "Anular la Inscripcion, solo para Materias Inscriptas");
                 }
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error" + ex);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "no tiene que tener nota");
+                JOptionPane.showMessageDialog(this, "no tiene que tener nota");
             } catch (Exception ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error" + ex);
             }
-
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione por favor, alumno o la materia");
+            JOptionPane.showMessageDialog(this, "Seleccione por favor, alumno o la materia");
         }
     }//GEN-LAST:event_jBAnularInscripcionActionPerformed
 
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
 
-        //if (flagTabla && flagCombo) {
         if (idAlumno != 0 && idMateria != 0) {
             try {
                 //Guardar la inscripcion estando el boton inscripto true
                 InscripcionDAO inscricionDAO = new InscripcionDAO();
-                //Inscripcion inscripcion=new Inscripcion();
 
                 if (!jRBMInscriptas.isSelected() && jRBMNoInscriptas.isSelected()) {
-                    //JOptionPane.showMessageDialog(null, "no se rompio");
-
-                    //idAlumno = selectedAlumno.getIdAlumno();
-                    inscricionDAO.guardarInscripcion(idAlumno, idMateria);
-
+                    inscricionDAO.guardarInscripcion(idAlumno, idMateria, this);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Guardar la Inscripcion, solo para Materias NO Inscriptas");
+                    JOptionPane.showMessageDialog(this, "Guardar la Inscripcion, solo para Materias NO Inscriptas");
                 }
                 modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
-
                 cargarTabla(idAlumno);
-
                 idMateria = 0;
                 idAlumno = 0;
-//                flagCombo = false;
-//                flagTabla = false;
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error " + ex);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "no tiene que tener nota");
+                JOptionPane.showMessageDialog(this, "no tiene que tener nota");
             } catch (Exception ex) {
-                Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "error " + ex);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione por favor, alumno o la materia");
+            JOptionPane.showMessageDialog(this, "Seleccione por favor, alumno o la materia");
         }
 
 
@@ -374,16 +359,14 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Llena el JComboBox con los valores del enum Categoria
-        //JComboBox tiene que ser tipo Categoria
+        // Llena el JComboBox con los valores tipo Alumno
         for (Alumno alumno : alumnos) {
             jCBSeleccionAlumno.addItem(alumno);
         }
     }
 
     private void cargarTabla(int idAlumno) throws Exception {
-        //listaProductos.add(new Producto(25, "Jabon", 250.25, 5, Rubro.Limpieza));
-        //JOptionPane.showMessageDialog(null, idAlumno);
+
         InscripcionDAO cursadas = new InscripcionDAO();
         Collection<Materia> listaMaterias = new ArrayList<>(); // Inicialización predeterminada
 
@@ -398,8 +381,28 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), tipo.getAnio()});
 
         }
-        //modelo.addRow(new Object[]{producto.getNombre(), producto.getCategoria(), producto.getPrecio()});
 
+    }
+
+    private void salirAplicacion() {
+        if (confirmarSalida()) {
+            dispose();
+        }
+    }
+
+    private boolean confirmarSalida() {
+        int confirmacion = JOptionPane.showOptionDialog(
+                this,
+                "¿Estás seguro que quieres salir de la aplicación?",
+                "Salir de la aplicación",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Sí", "No"},
+                "No" // Botón por defecto
+        );
+
+        return confirmacion == JOptionPane.YES_OPTION;
     }
 
 }
