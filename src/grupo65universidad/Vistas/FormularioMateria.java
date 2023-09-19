@@ -242,7 +242,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jTNombre.setText("");
         jTYear.setText("");
         //jRBEstado.setDisabledIcon(null);
-
+         setTitle("Cargar Materia");
         jRBEstado.setSelected(false);
         botonAnterior = null;
 
@@ -252,7 +252,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         //jTCodigo.setText("");
         jTNombre.setText("");
         jTYear.setText("");
-
+         setTitle("Cargar Materia");
     }
 
     private void eliminadologico() throws ClassNotFoundException, SQLException {
@@ -304,6 +304,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             Materia materia = new Materia(codigo, nombre, year, estado);
 
             if (botonAnterior == jBNuevo) {
+                materia.setEstado(true);
                 materiaD.guardarMateria(materia);
             } else {
                 materia.setEstado(true);

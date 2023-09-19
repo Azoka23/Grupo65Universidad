@@ -65,55 +65,6 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "error,sql " + ex);
         }
-////        // Agregar un oyente para manejar la edición de celdas
-////        jTNotas.addMouseListener(new MouseAdapter() {
-////            @Override
-////            public void mouseClicked(MouseEvent e) {
-////                int selectedRow = jTNotas.getSelectedRow();
-////                int selectedColumn = jTNotas.getSelectedColumn();
-////
-////                if (selectedRow != -1 && selectedColumn == 2) {
-////                    Object currentNotaObj = jTNotas.getValueAt(selectedRow, selectedColumn);
-////                    Object columna0Obj = jTNotas.getValueAt(selectedRow, 0);
-////
-////                if (currentNotaObj instanceof Integer && columna0Obj instanceof Integer) {
-////                    currentNota = (int) currentNotaObj;
-////                    idMateria = (int) columna0Obj;
-////                    
-////                        if (originalNota == 0) {
-////                            originalNota = currentNota;
-////                        }
-////                    } else {
-////                        // Manejar el caso en que los valores no sean enteros válidos
-////                        JOptionPane.showMessageDialog(null, "El valor no es un número entero válido.");
-////                    }
-////                }
-////            }
-////        });
-////
-////        // Agregar un oyente para manejar la edición de celdas con Enter
-////        jTNotas.addKeyListener(new java.awt.event.KeyAdapter() {
-////            @Override
-////            public void keyPressed(java.awt.event.KeyEvent evt) {
-////                if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-////                    int selectedRow = jTNotas.getSelectedRow();
-////                    int selectedColumn = jTNotas.getSelectedColumn();
-////
-////                    if (selectedRow != -1 && selectedColumn == 2) {
-////                        try {
-////                            String newCellValue = JOptionPane.showInputDialog("Ingrese la nueva nota:");
-////                            int newNota = Integer.parseInt(newCellValue);
-////
-////                            // Actualizar la celda y el valor actual
-////                            jTNotas.setValueAt(newNota, selectedRow, selectedColumn);
-////                            currentNota = newNota;
-////                        } catch (NumberFormatException ex) {
-////                            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número entero válido.");
-////                        }
-////                    }
-////                }
-////            }
-////        });
 
         // Agregar un oyente para manejar la edición de celdas
         jTNotas.addMouseListener(new java.awt.event.MouseAdapter() {
