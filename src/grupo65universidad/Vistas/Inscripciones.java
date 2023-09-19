@@ -55,7 +55,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         try {
             cargarCombo();
             // Seleccionar automáticamente el primer elemento del combo
-            jCBSeleccionAlumno.setSelectedIndex(0);
+            //jCBSeleccionAlumno.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
