@@ -63,6 +63,22 @@ public class MateriaDAO extends DAO {
 
     }
 
+    public int contarTotalRegistros() throws Exception {
+        //Cuenta la cantidad de registros y cuando devuelvo el entero necesito sumar 1
+        String sql = "SELECT COUNT(*) FROM materias";
+        //Obtengo el idMateria max, cuando devuelvo el entero sumo 1 --
+        //y en este caso si por algun motivo manualmente borre un registro de la tabla, de esta forma siempre obtengo el numero correcto
+        //String sql = "SELECT MAX(idMateria) FROM materias" 
+        try (PreparedStatement preparedStatement = conexion.prepareStatement(sql); ResultSet resultSet = preparedStatement.executeQuery()) {
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count+1;
+            }
+        }
+
+        return 0; // Devuelve 0 si no se encontraron registros
+    }
+
     public Materia buscarListaMateriaxDni(int idMateria) throws Exception {
         String sql = "SELECT * FROM `materias` WHERE idMateria=?";
 

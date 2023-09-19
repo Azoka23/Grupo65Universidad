@@ -5,7 +5,6 @@ import grupo65universidad.Entidades.Materia;
 
 import java.sql.SQLException;
 
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -175,7 +174,14 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiar();
         botonAnterior = jBNuevo;
-        //editarMateria(true);
+        try {
+            jTCodigo.setText(ultimoRegistro()+"");
+            //editarMateria(true);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "error " + ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "error " + ex);
+        }
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
@@ -242,7 +248,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         jTNombre.setText("");
         jTYear.setText("");
         //jRBEstado.setDisabledIcon(null);
-         setTitle("Cargar Materia");
+
         jRBEstado.setSelected(false);
         botonAnterior = null;
 
@@ -252,7 +258,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         //jTCodigo.setText("");
         jTNombre.setText("");
         jTYear.setText("");
-         setTitle("Cargar Materia");
+
     }
 
     private void eliminadologico() throws ClassNotFoundException, SQLException {
@@ -304,7 +310,6 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             Materia materia = new Materia(codigo, nombre, year, estado);
 
             if (botonAnterior == jBNuevo) {
-                materia.setEstado(true);
                 materiaD.guardarMateria(materia);
             } else {
                 materia.setEstado(true);
@@ -316,6 +321,12 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private int ultimoRegistro() throws ClassNotFoundException, SQLException, Exception {
+        MateriaDAO materiaD = new MateriaDAO();
+        return materiaD.contarTotalRegistros();
+
     }
 
     private void salirAplicacion() {
