@@ -13,10 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author wbasa
- */
+
 public class Menu extends javax.swing.JFrame {
 
     /**
@@ -37,7 +34,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jEscritorio = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
+        jLimagenULP = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumno = new javax.swing.JMenu();
         jDatosAlumnos = new javax.swing.JMenuItem();
@@ -54,9 +51,9 @@ public class Menu extends javax.swing.JFrame {
 
         jEscritorio.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
+        jLimagenULP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
 
-        jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jLimagenULP, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
@@ -64,14 +61,14 @@ public class Menu extends javax.swing.JFrame {
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(297, 297, 297)
-                .addComponent(jLabel1)
+                .addComponent(jLimagenULP)
                 .addContainerGap(303, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLimagenULP, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(180, Short.MAX_VALUE))
         );
 
@@ -175,18 +172,9 @@ public class Menu extends javax.swing.JFrame {
     private void jManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscripcionesActionPerformed
 
 
+
 //jEscritorio.removeAll();
 //jEscritorio.repaint();
-//
-//Inscripciones cargarIncrpcion = new Inscripciones();
-//jEscritorio.add(cargarIncrpcion);
-//cargarIncrpcion.setVisible(true);
-//
-//// Traer el JInternalFrame al frente y darle enfoque
-//cargarIncrpcion.toFront();
-//cargarIncrpcion.requestFocus();
-jEscritorio.removeAll();
-jEscritorio.repaint();
 
 Inscripciones cargarIncrpcion = new Inscripciones();
 
@@ -208,8 +196,8 @@ cargarIncrpcion.setVisible(true);
       
 
 
-jEscritorio.removeAll();
-jEscritorio.repaint();
+//jEscritorio.removeAll();
+//jEscritorio.repaint();
 
 FormularioMateria cargarMateria = new FormularioMateria();
 
@@ -230,13 +218,13 @@ cargarMateria.setVisible(true);
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
 
-jEscritorio.removeAll();
-jEscritorio.repaint();
+//jEscritorio.removeAll();
+//jEscritorio.repaint();
 
 ActualizacionNotas cargarNotas = new ActualizacionNotas();
 
 // Configurar el tamaño del JInternalFrame
-cargarNotas.setSize(500, 500);
+cargarNotas.setSize(500, 300);
 
 // Calcular el centro del JDesktopPane
 int x = (jEscritorio.getWidth() - cargarNotas.getWidth()) / 2;
@@ -252,13 +240,13 @@ cargarNotas.setVisible(true);
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
 
-jEscritorio.removeAll();
-jEscritorio.repaint();
+//jEscritorio.removeAll();
+//jEscritorio.repaint();
 
 ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
 
 // Configurar el tamaño del JInternalFrame
-alumnosxMateria.setSize(400, 300);
+alumnosxMateria.setSize(500, 300);
 
 // Calcular el centro del JDesktopPane
 int x = (jEscritorio.getWidth() - alumnosxMateria.getWidth()) / 2;
@@ -281,11 +269,9 @@ alumnosxMateria.setVisible(true);
 
     private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
 
-
-
-                                             
-    jEscritorio.removeAll();
-    jEscritorio.repaint();
+                                            
+    //jEscritorio.removeAll();
+    //jEscritorio.repaint();
     FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
     
     // Configurar el tamaño del JInternalFrame
@@ -355,7 +341,7 @@ alumnosxMateria.setVisible(true);
     private javax.swing.JMenuItem jDatosAlumnos;
     private javax.swing.JMenuItem jDatosMaterias;
     private javax.swing.JDesktopPane jEscritorio;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLimagenULP;
     private javax.swing.JMenu jMAdministracion;
     private javax.swing.JMenu jMAlumno;
     private javax.swing.JMenu jMConsulta;
@@ -366,17 +352,7 @@ alumnosxMateria.setVisible(true);
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 
-// public static  void centrarInternalFrame(JInternalFrame internalFrame) {
-//        //int parentWidth = desktopPane.getWidth();
-//        //int parentHeight = desktopPane.getHeight();
-//        int frameWidth = internalFrame.getWidth();
-//        int frameHeight = internalFrame.getHeight();
-//        int x = ( frameWidth) / 2;
-//        int y = (frameHeight) / 2;
-//        
-//        internalFrame.setLocation(x, y);
-//        //internalFrame.setVisible(true);
-//    }
+
     
     private void salir(){
     int respuesta=JOptionPane.showConfirmDialog(this, "Estas seguro que "
