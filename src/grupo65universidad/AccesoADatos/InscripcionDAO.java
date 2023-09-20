@@ -29,7 +29,7 @@ public class InscripcionDAO extends DAO {
 
             if (filasAfectadas > 0) {
                 // Se eliminaron registros exitosamente
-                JOptionPane.showMessageDialog(internalFrame, "Se guardaron");
+                JOptionPane.showMessageDialog(internalFrame, "Se guardo correctamente");
             } else {
                 // No se encontraron registros para eliminar
                 JOptionPane.showMessageDialog(internalFrame, "No se pudo guadar");
