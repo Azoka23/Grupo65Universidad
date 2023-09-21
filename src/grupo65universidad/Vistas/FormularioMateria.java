@@ -289,8 +289,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
                 jRBEstado.setSelected(materia.isEstado());
             } else {
                 botonAnterior = jBNuevo;
-                JOptionPane.showMessageDialog(this, "No se encontró el codigo.");
-
+                JOptionPane.showMessageDialog(this, "No se encontró el codigo,el codigo disponible es "+ultimoRegistro());
+                jTCodigo.setText(ultimoRegistro()+"");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Error: El código debe ser un número valido.");
