@@ -57,8 +57,6 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
-//        } catch (Exception e) {
-//            throw e;
         }
 
     }
@@ -72,7 +70,7 @@ public class MateriaDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql); ResultSet resultSet = preparedStatement.executeQuery()) {
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
-                return count+1;
+                return count + 1;
             }
         }
 
@@ -85,7 +83,6 @@ public class MateriaDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idMateria);
 
-            //ResultSet 
             resultado = consultarBase(preparedStatement);
             //consultarBase(sql);
             Materia materia = null;
@@ -96,9 +93,6 @@ public class MateriaDAO extends DAO {
             }
             return materia;
 
-//        } catch (Exception e) {
-//            desconectarBase();
-//            throw e;
         }
     }
 
