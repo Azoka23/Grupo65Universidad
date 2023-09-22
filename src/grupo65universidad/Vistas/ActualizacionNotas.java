@@ -36,10 +36,10 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
     private Alumno selectedAlumno = null;
     private int idMateria = 0;
     private int idAlumno = 0;
-    private Map<Integer, Integer> notasModificadas = new HashMap<>();
+    private Map<Integer, Double> notasModificadas = new HashMap<>();
 
 // Define una variable de instancia para almacenar el valor original de la celda
-    private int originalNota = 0;
+    private double originalNota = 0.0;
 // Define una variable de instancia para almacenar el valor actual de la celda
     private int currentNota = 0;
     private DefaultTableModel modelo = new DefaultTableModel() {
@@ -76,7 +76,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
                     int selectedColumn = jTNotas.getSelectedColumn();
 
                     if (selectedRow != -1 && selectedColumn == 2) {
-                        int originalValue = (int) jTNotas.getValueAt(selectedRow, selectedColumn);
+                        double originalValue = (double) jTNotas.getValueAt(selectedRow, selectedColumn);
                         // Obtener idMateria de la columna 0
                         idMateria = (int) jTNotas.getValueAt(selectedRow, 0);
                         // Mostrar el JSpinner con el valor original y idMateria
@@ -88,7 +88,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
 
     }
 
-    private void showSpinner(int initialValue, int row, int column, int idMateria) {
+    private void showSpinner(double initialValue, int row, int column, int idMateria) {
         // Crear un JDialog para mostrar el JSpinner
         JDialog dialog = new JDialog();
         dialog.setTitle("Editar Nota");
@@ -97,7 +97,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         dialog.setLayout(new FlowLayout());
 
         // Configurar el JSpinner
-        SpinnerModel spinnerModel = new SpinnerNumberModel(initialValue, 0, 10, 1);
+        SpinnerModel spinnerModel = new SpinnerNumberModel(initialValue, 0.0, 10.0, 0.5);
         spinner = new JSpinner(spinnerModel);
 
         // Botón "Guardar" para confirmar la selección
@@ -105,7 +105,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         guardarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int newValue = (int) spinner.getValue();
+                double newValue = (double) spinner.getValue();
                 notasModificadas.put(idMateria, newValue);
                 // Actualizar la celda en la tabla con el nuevo valor
                 jTNotas.setValueAt(newValue, row, column);
@@ -247,9 +247,9 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
         try {
             InscripcionDAO actualizarNota = null;
             actualizarNota = new InscripcionDAO();
-            for (Map.Entry<Integer, Integer> entry : notasModificadas.entrySet()) {
+            for (Map.Entry<Integer, Double> entry : notasModificadas.entrySet()) {
                 int idMateria = entry.getKey();
-                int nuevaNota = entry.getValue();
+                double nuevaNota = entry.getValue();
                 jTNotas.setValueAt(nuevaNota, getRowIndexForMateria(idMateria), 2);
                 actualizarNota.actualizarNota(idAlumno, idMateria, nuevaNota, this);
             }
@@ -306,7 +306,7 @@ private int getRowIndexForMateria(int idMateria) {
     }
 
     private void cargarTabla(int idAlumno) throws Exception {
-        int nota;
+        double nota;
         InscripcionDAO cursadas = new InscripcionDAO();
         Collection<Materia> listaMaterias = new ArrayList<>(); // Inicialización predeterminada
         listaMaterias = cursadas.obtenerMateriaCursada(idAlumno);

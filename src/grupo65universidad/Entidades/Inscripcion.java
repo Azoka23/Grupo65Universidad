@@ -5,18 +5,18 @@ package grupo65universidad.Entidades;
 public class Inscripcion {
 
     private int idInscripto;
-    private int nota;
+    private double nota;
     private Alumno idAlumno;
     private Materia idMateria;
 
-    public Inscripcion(int idInscripto, int nota, Alumno idAlumno, Materia idMateria) {
+    public Inscripcion(int idInscripto, double nota, Alumno idAlumno, Materia idMateria) {
         this.idInscripto = idInscripto;
         this.nota = nota;
         this.idAlumno = idAlumno;
         this.idMateria = idMateria;
     }
 
-    public Inscripcion(int nota, Alumno idAlumno, Materia idMateria) {
+    public Inscripcion(double nota, Alumno idAlumno, Materia idMateria) {
 
         this.nota = nota;
         this.idAlumno = idAlumno;
@@ -35,11 +35,11 @@ public class Inscripcion {
         this.idInscripto = idInscripto;
     }
 
-    public int getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(int nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
