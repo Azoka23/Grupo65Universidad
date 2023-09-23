@@ -7,8 +7,6 @@ import grupo65universidad.Entidades.Materia;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -54,12 +52,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
         try {
             cargarCombo();
-            // Seleccionar automáticamente el primer elemento del combo
-            //jCBSeleccionAlumno.setSelectedIndex(0);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            Utilidades.mostrarError(ex,this);
         } catch (SQLException ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            Utilidades.mostrarError(ex,this);
         }
     }
 
@@ -224,7 +220,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             cargarTabla(selectedAlumno.getIdAlumno());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "error" + ex);
+            Utilidades.mostrarError(ex,this);
         }
     }//GEN-LAST:event_jRBMNoInscriptasActionPerformed
 
@@ -236,7 +232,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             cargarTabla(selectedAlumno.getIdAlumno());
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "error" + ex);
+            Utilidades.mostrarError(ex,this);
         }
 
 
@@ -252,14 +248,14 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                 idAlumno = selectedAlumno.getIdAlumno();
                 cargarTabla(selectedAlumno.getIdAlumno());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "error" + ex);
+                Utilidades.mostrarError(ex,this);
             }
         }
     }//GEN-LAST:event_jCBSeleccionAlumnoActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         salirAplicacion();
-        //dispose();        // TODO add your handling code here:
+  
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void TablaMateriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMateriasMouseClicked
@@ -282,11 +278,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Anular la Inscripcion, solo para Materias Inscriptas");
                 }
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "error" + ex);
+                Utilidades.mostrarError(ex,this);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "no tiene que tener nota");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "error" + ex);
+                Utilidades.mostrarError(ex,this);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione por favor, alumno o la materia");
@@ -310,12 +306,12 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                 idMateria = 0;
                 idAlumno = 0;
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "error " + ex);
-            } catch (SQLException ex) {
+                Utilidades.mostrarError(ex,this);
+                  } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "no tiene que tener nota");
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "error " + ex);
-            }
+                Utilidades.mostrarError(ex,this);
+                }
 
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione por favor, alumno o la materia");
@@ -356,7 +352,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         try {
             alumnos = alumnoDao.listarAlumnos();
         } catch (Exception ex) {
-            Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
+            Utilidades.mostrarError(ex,this);
         }
 
         // Llena el JComboBox con los valores tipo Alumno
@@ -385,24 +381,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }
 
     private void salirAplicacion() {
-        if (Utilidades.confirmarSalida()) {
+        if (Utilidades.confirmarSalida(this)) {
             dispose();
         }
     }
 
-//    private boolean confirmarSalida() {
-//        int confirmacion = JOptionPane.showOptionDialog(
-//                this,
-//                "¿Estás seguro que quieres salir de la aplicación?",
-//                "Salir de la aplicación",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                new String[]{"Sí", "No"},
-//                "No" // Botón por defecto
-//        );
-//
-//        return confirmacion == JOptionPane.YES_OPTION;
-//    }
 
 }
