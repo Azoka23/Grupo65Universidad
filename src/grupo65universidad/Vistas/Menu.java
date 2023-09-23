@@ -47,7 +47,7 @@ public class Menu extends javax.swing.JFrame {
 
         jEscritorio.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
 
         jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -58,17 +58,17 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(297, 297, 297)
                 .addComponent(jLabel1)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
-        jMAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/student_man_avatar_user_toga_school_university_icon_209294_1.png"))); // NOI18N
+        jMAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/student_man_avatar_user_toga_school_university_icon_209294_1.png"))); // NOI18N
         jMAlumno.setText("Alumno");
 
         jDatosAlumnos.setText("Formulario Alumno");
@@ -81,7 +81,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMAlumno);
 
-        jMMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/education_books_library_icon_149685.png"))); // NOI18N
+        jMMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/education_books_library_icon_149685.png"))); // NOI18N
         jMMateria.setText("Materia");
 
         jDatosMaterias.setText("Formulario Materia");
@@ -94,7 +94,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMMateria);
 
-        jMAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/3700468-archive-document-education-exam-file-test_108747_1.png"))); // NOI18N
+        jMAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/3700468-archive-document-education-exam-file-test_108747_1.png"))); // NOI18N
         jMAdministracion.setText("Administracion");
 
         jManejoInscripciones.setText("Manejo de Inscripciones ");
@@ -115,7 +115,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMAdministracion);
 
-        jMConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/support_icon-icons.com_55294.png"))); // NOI18N
+        jMConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/support_icon-icons.com_55294.png"))); // NOI18N
         jMConsulta.setText("Consultas");
 
         jConsultasMaterias.setText("Alumnos por Materia");
@@ -128,7 +128,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMConsulta);
 
-        jMSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/477A86B10B034C3087ADC368774218B1.png"))); // NOI18N
+        jMSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/477A86B10B034C3087ADC368774218B1.png"))); // NOI18N
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

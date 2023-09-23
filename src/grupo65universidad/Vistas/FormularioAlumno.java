@@ -55,7 +55,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jTDocumento.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
