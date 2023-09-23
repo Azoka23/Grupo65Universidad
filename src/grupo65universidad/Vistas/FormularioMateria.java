@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 
 public class FormularioMateria extends javax.swing.JInternalFrame {
-
+    
     private JButton botonAnterior = null; // Variable para almacenar el botón anterior
 
     /**
@@ -21,7 +21,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     public FormularioMateria() {
         initComponents();
         setTitle("Cargar Materia");
-
+        
     }
 
     /**
@@ -172,7 +172,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
         botonAnterior = jBNuevo;
         try {
             jTCodigo.setText(ultimoRegistro() + "");
-
+            
         } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(this, "error " + ex);
             mostrarError(ex);
@@ -183,17 +183,17 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-
+        
         try {
             if (camposVacios()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar algun dato vacio");
             } else {
-
+                
                 guardar();
                 limpiar();
-
+                
             }
-
+            
         } catch (Exception ex) {
             // JOptionPane.showMessageDialog(this, "exception " + ex);
             mostrarError(ex);
@@ -203,12 +203,12 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         if (jTCodigo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debes escribir un Codigo");
-
+            
         } else {
             limpiarBuscar();
             botonAnterior = jBBuscar;
             buscarxCodigo();
-
+            
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
@@ -243,27 +243,28 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiar() {
-        jTCodigo.setText("");
-        jTNombre.setText("");
-        jTYear.setText("");
-
+//        jTCodigo.setText("");
+//        jTNombre.setText("");
+//        jTYear.setText("");
+        Utilidades.limpiarSetText(jTCodigo, jTNombre, jTYear);
         jRBEstado.setSelected(false);
         botonAnterior = null;
-
+        
     }
-
+    
     private void limpiarBuscar() {
-        jTNombre.setText("");
-        jTYear.setText("");
+        Utilidades.limpiarSetText(jTNombre, jTYear);
+//        jTNombre.setText("");
+//        jTYear.setText("");
 
     }
-
+    
     private void eliminadologico() throws ClassNotFoundException, SQLException {
         if (botonAnterior == jBBuscar) {
             MateriaDAO materiaD = new MateriaDAO();
-
+            
             int codigo = Integer.parseInt(jTCodigo.getText());
-
+            
             try {
                 materiaD.eliminarLogico(codigo);
             } catch (Exception ex) {
@@ -274,14 +275,14 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de codigo que exista.");
         }
     }
-
+    
     private void buscarxCodigo() {
         try {
             int codigo = Integer.parseInt(jTCodigo.getText());
-
+            
             MateriaDAO materiaDao = new MateriaDAO();
             Materia materia = materiaDao.buscarListaMateriaxDni(codigo);
-
+            
             if (materia != null) {
                 jTNombre.setText(materia.getNombre());
                 jTYear.setText(String.valueOf(materia.getAnio()));
@@ -299,7 +300,7 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             mostrarError(ex);
         }
     }
-
+    
     private void guardar() {
         int codigo = 0;
         int year = 0;
@@ -318,10 +319,10 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
 //                //return;
 //            }
             boolean estado = jRBEstado.isSelected();
-
+            
             MateriaDAO materiaD = new MateriaDAO();
             Materia materia = new Materia(codigo, nombre, year, estado);
-
+            
             if (botonAnterior == jBNuevo) {
                 materiaD.guardarMateria(materia);
             } else {
@@ -334,38 +335,37 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             mostrarError(ex);
         }
     }
-
+    
     private int ultimoRegistro() throws ClassNotFoundException, SQLException, Exception {
         MateriaDAO materiaD = new MateriaDAO();
         return materiaD.contarTotalRegistros();
-
+        
     }
-
+    
     private void salirAplicacion() {
-        if (confirmarSalida()) {
+        if (Utilidades.confirmarSalida()) {
             dispose();
         }
     }
 
-    private boolean confirmarSalida() {
-        int confirmacion = JOptionPane.showOptionDialog(
-                this,
-                "¿Estás seguro que quieres salir de la aplicación?",
-                "Salir de la aplicación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                new String[]{"Sí", "No"},
-                "No" // Botón por defecto
-        );
-
-        return confirmacion == JOptionPane.YES_OPTION;
-    }
-
+//    private boolean confirmarSalida() {
+//        int confirmacion = JOptionPane.showOptionDialog(
+//                this,
+//                "¿Estás seguro que quieres salir de la aplicación?",
+//                "Salir de la aplicación",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                new String[]{"Sí", "No"},
+//                "No" // Botón por defecto
+//        );
+//
+//        return confirmacion == JOptionPane.YES_OPTION;
+//    }
     private void mostrarError(Exception ex) {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
     }
-
+    
     private boolean camposVacios() {
         return jTCodigo.getText().isEmpty() || jTNombre.getText().isEmpty() || jTYear.getText().isEmpty();
     }

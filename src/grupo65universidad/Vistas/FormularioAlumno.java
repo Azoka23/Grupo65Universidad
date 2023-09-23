@@ -200,7 +200,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     private void jBNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoActionPerformed
         limpiar();
         botonAnterior = jBNuevo;
-       
+
     }//GEN-LAST:event_jBNuevoActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -237,7 +237,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             if (jTDocumento.getText().isEmpty() || jTApellido.getText().isEmpty() || jTNombre.getText().isEmpty() || jDCHFechaNacimiento.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "No debe dejar algun dato vacio");
             } else {
-                if (botonAnterior == jBNuevo) {
+               if (botonAnterior == jBNuevo||botonAnterior==jBBuscar) {
 
                     guardar();
                     limpiar();
@@ -277,30 +277,31 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void salirAplicacion() {
-        if (confirmarSalida()) {
+        if (Utilidades.confirmarSalida()) {
             dispose();
         }
     }
 
-    private boolean confirmarSalida() {
-        int confirmacion = JOptionPane.showOptionDialog(
-                this,
-                "¿Estás seguro que quieres salir de la aplicación?",
-                "Salir de la aplicación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                new String[]{"Sí", "No"},
-                "No" // Botón por defecto
-        );
-
-        return confirmacion == JOptionPane.YES_OPTION;
-    }
-
+//    private boolean confirmarSalida() {
+//        int confirmacion = JOptionPane.showOptionDialog(
+//                this,
+//                "¿Estás seguro que quieres salir de la aplicación?",
+//                "Salir de la aplicación",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                new String[]{"Sí", "No"},
+//                "No" // Botón por defecto
+//        );
+//
+//        return confirmacion == JOptionPane.YES_OPTION;
+//    }
     private void limpiar() {
-        jTDocumento.setText("");
-        jTApellido.setText("");
-        jTNombre.setText("");
+//        jTDocumento.setText("");
+//        jTApellido.setText("");
+//        jTNombre.setText("");
+//        
+        Utilidades.limpiarSetText(jTDocumento, jTApellido, jTNombre);
         jDCHFechaNacimiento.setCalendar(null);
         jRBEstado.setSelected(false);
 
@@ -309,9 +310,9 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     }
 
     private void limpiarBuscar() {
-
-        jTApellido.setText("");
-        jTNombre.setText("");
+        Utilidades.limpiarSetText(jTApellido, jTNombre);
+//        jTApellido.setText("");
+//        jTNombre.setText("");
         jDCHFechaNacimiento.setCalendar(null);
 
     }
@@ -366,19 +367,26 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             try {
                 documento = Integer.parseInt(jTDocumento.getText());
                 alumno = alumnoD.buscarListaAlumnoxDni(documento);
-                if (alumno != null) {
-                   JOptionPane.showMessageDialog(this, "El Documento ya existe, no puede darlo de Alta.");
-                   return;
+                
+                if (alumno != null && botonAnterior == jBNuevo) {
+                    JOptionPane.showMessageDialog(this, "El Documento ya existe, no puede darlo de Alta.");
+                    return;
+                }else{
+                    alumno = new Alumno();
+                    //botonAnterior = jBNuevo;
                 }
+                
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error: Debes ingresar un número de documento válido.");
                 return;
             }
+  
             String apellido = jTApellido.getText();
             String nombre = jTNombre.getText();
             LocalDate fechaNacimiento = jDCHFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             boolean estado = jRBEstado.isSelected();
-
+            
+       // JOptionPane.showMessageDialog(this, alumno+"DNI "+documento);  
             // Asignar los valores al objeto alumno
             alumno.setDni(documento);
             alumno.setApellido(apellido);
@@ -395,15 +403,17 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "error: " + e);
                 }
 
-            } else {
-//JOptionPane.showMessageDialog(this, botonAnterior);
-
+           } else if ((botonAnterior == jBBuscar)) {
+ //           }else{
+ 
                 alumnoD.modificarAlumno(alumno);
             }
 
+            //JOptionPane.showMessageDialog(this, botonAnterior);
         } catch (NumberFormatException e) {
             // Manejar una excepción si no se pudo convertir el número
-            e.printStackTrace();
+           // e.printStackTrace();
+           JOptionPane.showMessageDialog(this, "error: "+e);
         }
     }
 

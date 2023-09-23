@@ -191,23 +191,23 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
     }
 
     private void salirAplicacion() {
-        if (confirmarSalida()) {
+        if (Utilidades.confirmarSalida()) {
             dispose();
         }
     }
 
-    private boolean confirmarSalida() {
-        int confirmacion = JOptionPane.showOptionDialog(
-                this,
-                "¿Estás seguro que quieres salir de la aplicación?",
-                "Salir de la aplicación",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                new String[]{"Sí", "No"},
-                "No" // Botón por defecto
-        );
-
-        return confirmacion == JOptionPane.YES_OPTION;
-    }
+//    private boolean confirmarSalida() {
+//        int confirmacion = JOptionPane.showOptionDialog(
+//                this,
+//                "¿Estás seguro que quieres salir de la aplicación?",
+//                "Salir de la aplicación",
+//                JOptionPane.YES_NO_OPTION,
+//                JOptionPane.QUESTION_MESSAGE,
+//                null,
+//                new String[]{"Sí", "No"},
+//                "No" // Botón por defecto
+//        );
+//
+//        return confirmacion == JOptionPane.YES_OPTION;
+//    }
 }
