@@ -1,22 +1,14 @@
 package grupo65universidad.Vistas;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import grupo65universidad.AccesoADatos.AlumnoDAO;
 import grupo65universidad.Entidades.Alumno;
 import java.sql.Date;
 import javax.swing.JButton;
-import javax.swing.event.InternalFrameAdapter;
-import javax.swing.event.InternalFrameEvent;
 
 public class FormularioAlumno extends javax.swing.JInternalFrame {
 
@@ -63,7 +55,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
         jTDocumento.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
-        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidadejemplo/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -227,9 +219,9 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             try {
                 buscarxDni();
             } catch (ClassNotFoundException ex) {
-                JOptionPane.showMessageDialog(this, "error " + ex);
+                Utilidades.mostrarError(ex,this);
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(this, "error " + ex);
+                Utilidades.mostrarError(ex,this);
             }
 
         }
@@ -256,7 +248,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "exception " + ex);
+            Utilidades.mostrarError(ex,this);
+          //  JOptionPane.showMessageDialog(this, "exception " + ex);
         }
 
 
@@ -282,30 +275,13 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void salirAplicacion() {
-        if (Utilidades.confirmarSalida()) {
+        if (Utilidades.confirmarSalida(this)) {
             dispose();
         }
     }
 
-//    private boolean confirmarSalida() {
-//        int confirmacion = JOptionPane.showOptionDialog(
-//                this,
-//                "¿Estás seguro que quieres salir de la aplicación?",
-//                "Salir de la aplicación",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                new String[]{"Sí", "No"},
-//                "No" // Botón por defecto
-//        );
-//
-//        return confirmacion == JOptionPane.YES_OPTION;
-//    }
     private void limpiar() {
-//        jTDocumento.setText("");
-//        jTApellido.setText("");
-//        jTNombre.setText("");
-//        
+    
         Utilidades.limpiarSetText(jTDocumento, jTApellido, jTNombre);
         jDCHFechaNacimiento.setCalendar(null);
         jRBEstado.setSelected(false);
@@ -316,8 +292,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void limpiarBuscar() {
         Utilidades.limpiarSetText(jTApellido, jTNombre);
-//        jTApellido.setText("");
-//        jTNombre.setText("");
         jDCHFechaNacimiento.setCalendar(null);
 
     }
@@ -378,7 +352,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                     return;
                 }else{
                     alumno = new Alumno();
-                    //botonAnterior = jBNuevo;
                 }
                 
             } catch (Exception e) {
@@ -391,7 +364,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             LocalDate fechaNacimiento = jDCHFechaNacimiento.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             boolean estado = jRBEstado.isSelected();
             
-       // JOptionPane.showMessageDialog(this, alumno+"DNI "+documento);  
             // Asignar los valores al objeto alumno
             alumno.setDni(documento);
             alumno.setApellido(apellido);
@@ -404,21 +376,17 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             if (botonAnterior == jBNuevo) {
                 try {
                     alumnoD.guardarAlumno(alumno);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "error: " + e);
+                } catch (Exception ex) {
+                    Utilidades.mostrarError(ex,this);
                 }
 
            } else if ((botonAnterior == jBBuscar)) {
- //           }else{
  
                 alumnoD.modificarAlumno(alumno);
             }
 
-            //JOptionPane.showMessageDialog(this, botonAnterior);
-        } catch (NumberFormatException e) {
-            // Manejar una excepción si no se pudo convertir el número
-           // e.printStackTrace();
-           JOptionPane.showMessageDialog(this, "error: "+e);
+        } catch (NumberFormatException ex) {
+           Utilidades.mostrarError(ex,this);
         }
     }
 

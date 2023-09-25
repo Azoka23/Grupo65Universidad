@@ -3,9 +3,6 @@ package grupo65universidad.Vistas;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +38,7 @@ public class ActualizacionNotas extends javax.swing.JInternalFrame {
 // Define una variable de instancia para almacenar el valor original de la celda
     private double originalNota = 0.0;
 // Define una variable de instancia para almacenar el valor actual de la celda
-    private int currentNota = 0;
+    private double currentNota = 0;
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int fila, int columna) {
@@ -317,23 +314,9 @@ private int getRowIndexForMateria(int idMateria) {
     }
     
         private void salirAplicacion() {
-        if (Utilidades.confirmarSalida()) {
+        if (Utilidades.confirmarSalida(this)) {
             dispose();
         }
     }
 
-//    private boolean confirmarSalida() {
-//        int confirmacion = JOptionPane.showOptionDialog(
-//                this,
-//                "¿Estás seguro que quieres salir de la aplicación?",
-//                "Salir de la aplicación",
-//                JOptionPane.YES_NO_OPTION,
-//                JOptionPane.QUESTION_MESSAGE,
-//                null,
-//                new String[]{"Sí", "No"},
-//                "No" // Botón por defecto
-//        );
-//
-//        return confirmacion == JOptionPane.YES_OPTION;
-//    }
 }

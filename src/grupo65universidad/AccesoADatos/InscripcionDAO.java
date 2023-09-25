@@ -57,6 +57,7 @@ public class InscripcionDAO extends DAO {
                 JOptionPane.showMessageDialog(internalFrame, "No se pudo actualizar la nota");
             }
         } catch (Exception ex) {
+        
             JOptionPane.showMessageDialog(internalFrame, "error: "+ex);
         }
 
@@ -91,8 +92,7 @@ public class InscripcionDAO extends DAO {
 
 
     public Collection<Materia> obtenerMateriaCursada(int idAlumno) throws Exception {
-        //Materia materia = new MateriaDAO();
-
+ 
         MateriaDAO materiaDAO = new MateriaDAO();
 
         String sql = "SELECT DISTINCT m.idMateria, m.nombre "
@@ -168,10 +168,6 @@ public class InscripcionDAO extends DAO {
 
     public double buscarNota(int idAlumno, int idMateria) throws Exception {
         double nota = 0.0;
-        // Materia materia = new Materia();
-        // Crear una instancia de EmpleadoDAO
-        //AlumnoDAO alumnoDAO = new AlumnoDAO();
-        // Crear una instancia de HerramientaDAO
         MateriaDAO materiaDAO = new MateriaDAO();
 
         String sql = "SELECT i.nota FROM inscripciones i "

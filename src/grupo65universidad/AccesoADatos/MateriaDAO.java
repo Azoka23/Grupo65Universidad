@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import grupo65universidad.Entidades.Materia;
 
-import grupo65universidad.Entidades.Materia;
-
 public class MateriaDAO extends DAO {
 
     public MateriaDAO() throws ClassNotFoundException, SQLException {
@@ -40,7 +38,6 @@ public class MateriaDAO extends DAO {
 
             preparedStatement.setString(1, materia.getNombre());
             preparedStatement.setInt(2, materia.getAnio());
-            //preparedStatement.setBoolean(3, materia.isEstado());
             preparedStatement.setInt(3, materia.getIdMateria());
 
             insertarModificarEliminar(preparedStatement);
@@ -84,7 +81,6 @@ public class MateriaDAO extends DAO {
             preparedStatement.setInt(1, idMateria);
 
             resultado = consultarBase(preparedStatement);
-            //consultarBase(sql);
             Materia materia = null;
 
             if (resultado.next()) {
@@ -101,10 +97,7 @@ public class MateriaDAO extends DAO {
 
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idMateria);
-            //JOptionPane.showMessageDialog(null, resultado+"antes de consultar");
-            //ResultSet 
             resultado = consultarBase(preparedStatement);
-            // JOptionPane.showMessageDialog(null, resultado+"despues de consultar");
             Materia materia = null;
 
             if (resultado.next()) {
@@ -119,11 +112,9 @@ public class MateriaDAO extends DAO {
 
     public Collection<Materia> listarMaterias() throws Exception {
         String sql = "SELECT * FROM `materias`";
-        //Materia materia = null;
-
+ 
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-            //ResultSet 
-            resultado = consultarBase(preparedStatement);
+             resultado = consultarBase(preparedStatement);
             Collection<Materia> materias = new ArrayList();
 
             while (resultado.next()) {
@@ -143,7 +134,6 @@ public class MateriaDAO extends DAO {
     private Materia obtenerMateriaDesdeResultado(ResultSet result) throws SQLException {
 
         Materia materia = new Materia();
-        //JOptionPane.showMessageDialog(null, result);
         materia.setIdMateria(result.getInt("idMateria"));
 
         materia.setNombre(result.getString("nombre"));
