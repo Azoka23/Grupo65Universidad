@@ -56,16 +56,16 @@ public class Menu extends javax.swing.JFrame {
         jEscritorioLayout.setHorizontalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
-                .addGap(297, 297, 297)
+                .addGap(161, 161, 161)
                 .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addGap(116, 116, 116)
+                .addComponent(jLabel1)
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jMAlumno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/student_man_avatar_user_toga_school_university_icon_209294_1.png"))); // NOI18N
@@ -167,13 +167,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscripcionesActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+        //jEscritorio.removeAll();
+        //jEscritorio.repaint();
 
         Inscripciones cargarIncrpcion = new Inscripciones();
 
 // Configurar el tamaño del JInternalFrame
-        cargarIncrpcion.setSize(500, 500);
+        cargarIncrpcion.setSize(500, 450);
 
 // Calcular el centro del JDesktopPane
         int x = (jEscritorio.getWidth() - cargarIncrpcion.getWidth()) / 2;
@@ -187,8 +187,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jDatosMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosMateriasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+        //jEscritorio.removeAll();
+        //jEscritorio.repaint();
 
         FormularioMateria cargarMateria = new FormularioMateria();
 
@@ -208,13 +208,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+        //jEscritorio.removeAll();
+        //jEscritorio.repaint();
 
         ActualizacionNotas cargarNotas = new ActualizacionNotas();
 
 // Configurar el tamaño del JInternalFrame
-        cargarNotas.setSize(500, 500);
+        cargarNotas.setSize(500, 300);
 
 // Calcular el centro del JDesktopPane
         int x = (jEscritorio.getWidth() - cargarNotas.getWidth()) / 2;
@@ -229,8 +229,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+        //jEscritorio.removeAll();
+        //jEscritorio.repaint();
 
         ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
 
@@ -254,8 +254,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
 
-        jEscritorio.removeAll();
-        jEscritorio.repaint();
+        //jEscritorio.removeAll();
+        //jEscritorio.repaint();
         FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
 
         // Configurar el tamaño del JInternalFrame

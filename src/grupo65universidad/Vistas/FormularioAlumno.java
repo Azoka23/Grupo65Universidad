@@ -48,12 +48,11 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(0, 51, 51));
         setClosable(true);
         setTitle("Alumno");
-        setVisible(true);
+        setVisible(false);
 
-        jLDocumento.setForeground(new java.awt.Color(0, 0, 0));
         jLDocumento.setText("Documento");
 
-        jTDocumento.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTDocumento.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/search_find_lupa_21889.png"))); // NOI18N
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,18 +61,14 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jLApellido.setForeground(new java.awt.Color(0, 0, 0));
         jLApellido.setText("Apellido");
 
-        jLNombre.setForeground(new java.awt.Color(0, 0, 0));
         jLNombre.setText("Nombre");
 
-        jLEstado.setForeground(new java.awt.Color(0, 0, 0));
         jLEstado.setText("Estado");
 
         jRBEstado.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLFechaNacimiento.setForeground(new java.awt.Color(0, 0, 0));
         jLFechaNacimiento.setText("Fecha de Nacimiento");
 
         jBNuevo.setText("Nuevo");
