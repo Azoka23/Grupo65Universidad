@@ -298,7 +298,10 @@ private int getRowIndexForMateria(int idMateria) {
             Logger.getLogger(Inscripciones.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (Alumno alumno : alumnos) {
-            jCBSeleccionarAlumno.addItem(alumno);
+            if (alumno.isEstado()) {
+                jCBSeleccionarAlumno.addItem(alumno);
+            }
+            
         }
     }
 
@@ -309,7 +312,10 @@ private int getRowIndexForMateria(int idMateria) {
         listaMaterias = cursadas.obtenerMateriaCursada(idAlumno);
         for (Materia tipo : listaMaterias) {
             nota = cursadas.buscarNota(idAlumno, tipo.getIdMateria());
-            modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), nota});
+            if (tipo.isEstado()) {
+                modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), nota});
+            }
+            
         }
     }
     

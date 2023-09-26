@@ -32,7 +32,7 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
             materiaDao = new MateriaDAO();
             inscripcionDao = new InscripcionDAO();
 
-           armarCabecera();
+            armarCabecera();
             cargarCombo();
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "error: " + ex);
@@ -169,7 +169,10 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
         try {
             Collection<Materia> materias = materiaDao.listarMaterias();
             for (Materia materia : materias) {
-                jCBSeleccionarMateria.addItem(materia);
+                if (materia.isEstado()) {
+                    jCBSeleccionarMateria.addItem(materia);
+                }
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
@@ -181,7 +184,11 @@ public class ConsultaAlumnosxMateria extends javax.swing.JInternalFrame {
             Collection<Alumno> listaAlumno = inscripcionDao.obtenerAlumnoxMateria(idMateria);
             modelo.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
             for (Alumno alumno : listaAlumno) {
-                modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+                if (alumno.isEstado()) {
+                    modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
+
+                }
+                //modelo.addRow(new Object[]{alumno.getIdAlumno(), alumno.getDni(), alumno.getApellido(), alumno.getNombre()});
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());

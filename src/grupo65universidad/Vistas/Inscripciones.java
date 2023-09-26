@@ -357,7 +357,10 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
         // Llena el JComboBox con los valores tipo Alumno
         for (Alumno alumno : alumnos) {
-            jCBSeleccionAlumno.addItem(alumno);
+            if (alumno.isEstado()) {
+                jCBSeleccionAlumno.addItem(alumno);
+            }
+            
         }
     }
 
@@ -373,9 +376,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         }
 
         for (Materia tipo : listaMaterias) {
+            if (tipo.isEstado()) {
+                modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), tipo.getAnio()});
 
-            modelo.addRow(new Object[]{tipo.getIdMateria(), tipo.getNombre(), tipo.getAnio()});
-
+            }
+            
         }
 
     }
