@@ -30,7 +30,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jEscritorio = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
+        jLULP = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumno = new javax.swing.JMenu();
         jDatosAlumnos = new javax.swing.JMenuItem();
@@ -47,9 +47,9 @@ public class Menu extends javax.swing.JFrame {
 
         jEscritorio.setBackground(new java.awt.Color(0, 51, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
+        jLULP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grupo65universidad/Vistas/Imagenes/descarga.jpeg"))); // NOI18N
 
-        jEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jEscritorio.setLayer(jLULP, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jEscritorioLayout = new javax.swing.GroupLayout(jEscritorio);
         jEscritorio.setLayout(jEscritorioLayout);
@@ -57,14 +57,14 @@ public class Menu extends javax.swing.JFrame {
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(161, 161, 161)
-                .addComponent(jLabel1)
+                .addComponent(jLULP)
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         jEscritorioLayout.setVerticalGroup(
             jEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jEscritorioLayout.createSequentialGroup()
                 .addGap(116, 116, 116)
-                .addComponent(jLabel1)
+                .addComponent(jLULP)
                 .addContainerGap(133, Short.MAX_VALUE))
         );
 
@@ -167,8 +167,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManejoInscripcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManejoInscripcionesActionPerformed
 
-        //jEscritorio.removeAll();
-        //jEscritorio.repaint();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        jEscritorio.add(jLULP);
 
         Inscripciones cargarIncrpcion = new Inscripciones();
 
@@ -187,8 +188,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jDatosMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosMateriasActionPerformed
 
-        //jEscritorio.removeAll();
-        //jEscritorio.repaint();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        jEscritorio.add(jLULP);
 
         FormularioMateria cargarMateria = new FormularioMateria();
 
@@ -208,8 +210,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jManipulacionNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jManipulacionNotasActionPerformed
 
-        //jEscritorio.removeAll();
-        //jEscritorio.repaint();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        jEscritorio.add(jLULP);
 
         ActualizacionNotas cargarNotas = new ActualizacionNotas();
 
@@ -229,8 +232,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jConsultasMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultasMateriasActionPerformed
 
-        //jEscritorio.removeAll();
-        //jEscritorio.repaint();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        jEscritorio.add(jLULP);
 
         ConsultaAlumnosxMateria alumnosxMateria = new ConsultaAlumnosxMateria();
 
@@ -254,8 +258,9 @@ public class Menu extends javax.swing.JFrame {
 
     private void jDatosAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDatosAlumnosActionPerformed
 
-        //jEscritorio.removeAll();
-        //jEscritorio.repaint();
+        jEscritorio.removeAll();
+        jEscritorio.repaint();
+        jEscritorio.add(jLULP);
         FormularioAlumno cargarAlumnoProbandoVista = new FormularioAlumno();
 
         // Configurar el tamaño del JInternalFrame
@@ -317,7 +322,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jDatosAlumnos;
     private javax.swing.JMenuItem jDatosMaterias;
     private javax.swing.JDesktopPane jEscritorio;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLULP;
     private javax.swing.JMenu jMAdministracion;
     private javax.swing.JMenu jMAlumno;
     private javax.swing.JMenu jMConsulta;

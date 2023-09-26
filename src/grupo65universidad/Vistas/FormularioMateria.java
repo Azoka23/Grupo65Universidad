@@ -256,6 +256,8 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             
             try {
                 materiaD.eliminarLogico(codigo);
+                JOptionPane.showMessageDialog(this, "la materia fue dada de baja");
+                limpiar();
             } catch (Exception ex) {
                 Utilidades.mostrarError(ex,this);
             }

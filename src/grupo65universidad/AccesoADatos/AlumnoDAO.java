@@ -82,7 +82,7 @@ public class AlumnoDAO extends DAO {
             }
 
             return alumno;
-        } 
+        }
 
     }
 
@@ -108,6 +108,7 @@ public class AlumnoDAO extends DAO {
             while (resultado.next()) {
                 alumnos.add(obtenerAlumnoDesdeResultado(resultado));
             }
+
             return alumnos;
 
         }

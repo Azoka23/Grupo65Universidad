@@ -297,6 +297,8 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
                 int dni = Integer.parseInt(jTDocumento.getText());
                 AlumnoDAO alumnoD = new AlumnoDAO();
                 alumnoD.eliminarLogico(dni);
+                JOptionPane.showMessageDialog(this, "El alumno fue dado de baja");
+                limpiar();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de documento válido.");
             } catch (Exception ex) {
@@ -370,6 +372,7 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
             //solo grabar si fue elegida la opcion Nuevo - boton 
             if (botonAnterior == jBNuevo) {
                 try {
+                    alumno.setEstado(true);
                     alumnoD.guardarAlumno(alumno);
                 } catch (Exception ex) {
                     Utilidades.mostrarError(ex,this);
