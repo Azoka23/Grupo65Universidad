@@ -26,6 +26,11 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
     }
 
@@ -41,8 +46,12 @@ public class MateriaDAO extends DAO {
             preparedStatement.setInt(3, materia.getIdMateria());
 
             insertarModificarEliminar(preparedStatement);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
-
     }
 
     public void eliminarLogico(int codigo) throws Exception {
@@ -54,8 +63,12 @@ public class MateriaDAO extends DAO {
 
             insertarModificarEliminar(preparedStatement);
 
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
-
     }
 
     public int contarTotalRegistros() throws Exception {
@@ -69,8 +82,12 @@ public class MateriaDAO extends DAO {
                 int count = resultSet.getInt(1);
                 return count + 1;
             }
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
-
         return 0; // Devuelve 0 si no se encontraron registros
     }
 
@@ -88,6 +105,7 @@ public class MateriaDAO extends DAO {
                 materia = obtenerMateriaDesdeResultado(resultado);
             }
             return materia;
+
 
         }
     }
@@ -107,14 +125,15 @@ public class MateriaDAO extends DAO {
             }
 
             return materia;
+
         }
     }
 
     public Collection<Materia> listarMaterias() throws Exception {
         String sql = "SELECT * FROM `materias`";
- 
+
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
-             resultado = consultarBase(preparedStatement);
+            resultado = consultarBase(preparedStatement);
             Collection<Materia> materias = new ArrayList();
 
             while (resultado.next()) {
@@ -122,6 +141,7 @@ public class MateriaDAO extends DAO {
             }
 
             return materias;
+
         }
     }
 

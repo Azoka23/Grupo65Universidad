@@ -34,6 +34,11 @@ public class InscripcionDAO extends DAO {
                 // No se encontraron registros para eliminar
                 JOptionPane.showMessageDialog(internalFrame, "No se pudo guadar");
             }
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
     }
 
@@ -42,7 +47,7 @@ public class InscripcionDAO extends DAO {
         String sql = "UPDATE inscripciones SET nota=? WHERE idAlumno=? AND idMateria=? ";
 
         try {
-            PreparedStatement preparedStatement = conexion.prepareStatement(sql) ;
+            PreparedStatement preparedStatement = conexion.prepareStatement(sql);
 
             preparedStatement.setDouble(1, nota);
             preparedStatement.setInt(2, idAlumno);
@@ -56,14 +61,16 @@ public class InscripcionDAO extends DAO {
                 // No se encontraron registros para eliminar
                 JOptionPane.showMessageDialog(internalFrame, "No se pudo actualizar la nota");
             }
-        } catch (Exception ex) {
-        
-            JOptionPane.showMessageDialog(internalFrame, "error: "+ex);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
 
     }
 
-    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria,JInternalFrame internalFrame) throws Exception {
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria, JInternalFrame internalFrame) throws Exception {
 
         String sql = "DELETE FROM inscripciones WHERE idAlumno = ? AND idMateria = ? AND (nota = 0 OR nota IS NULL)";
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
@@ -77,6 +84,11 @@ public class InscripcionDAO extends DAO {
                 // No se encontraron registros para eliminar
                 JOptionPane.showMessageDialog(internalFrame, "No se encontraron registros para eliminar, Nota distinto de 0");
             }
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
 
     }
@@ -86,13 +98,17 @@ public class InscripcionDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idInscripto);
             insertarModificarEliminar(preparedStatement);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
 
     }
 
-
     public Collection<Materia> obtenerMateriaCursada(int idAlumno) throws Exception {
- 
+
         MateriaDAO materiaDAO = new MateriaDAO();
 
         String sql = "SELECT DISTINCT m.idMateria, m.nombre "

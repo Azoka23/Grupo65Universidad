@@ -26,6 +26,11 @@ public class AlumnoDAO extends DAO {
             preparedStatement.setBoolean(5, alumno.isEstado());
 
             insertarModificarEliminar(preparedStatement);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
     }
 
@@ -41,6 +46,11 @@ public class AlumnoDAO extends DAO {
             preparedStatement.setInt(4, alumno.getDni());
 
             insertarModificarEliminar(preparedStatement);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
     }
 
@@ -51,12 +61,17 @@ public class AlumnoDAO extends DAO {
             preparedStatement.setBoolean(1, false);
             preparedStatement.setInt(2, dni);
             insertarModificarEliminar(preparedStatement);
+        } catch (SQLException ex) {
+            // Manejar la excepción si es necesario
+            throw ex;
+        } finally {
+            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
     }
 
     public Alumno buscarListaAlumnoxDni(int dni) throws Exception {
         String sql = "SELECT * FROM `alumnos` WHERE dni=?";
-
+//conectarBase();
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, dni);
             resultado = consultarBase(preparedStatement);
@@ -67,7 +82,8 @@ public class AlumnoDAO extends DAO {
             }
 
             return alumno;
-        }
+        } 
+
     }
 
     public Alumno obtenerAlumnoPorId(int idAlumno) throws Exception {
@@ -80,6 +96,7 @@ public class AlumnoDAO extends DAO {
                 alumno = obtenerAlumnoDesdeResultado(resultado);
             }
             return alumno;
+
         }
     }
 
@@ -92,6 +109,7 @@ public class AlumnoDAO extends DAO {
                 alumnos.add(obtenerAlumnoDesdeResultado(resultado));
             }
             return alumnos;
+
         }
     }
 
