@@ -303,9 +303,11 @@ public class FormularioMateria extends javax.swing.JInternalFrame {
             Materia materia = new Materia(codigo, nombre, year, estado);
             
             if (botonAnterior == jBNuevo) {
+                 materia.setEstado(true);
                 materiaD.guardarMateria(materia);
             } else {
                 materia.setEstado(true);
+                
                 materiaD.modificarMateria(materia);
             }
         } catch (NumberFormatException ex) {
