@@ -98,6 +98,7 @@ public class MateriaDAO extends DAO {
             preparedStatement.setInt(1, idMateria);
 
             resultado = consultarBase(preparedStatement);
+            
             Materia materia = null;
 
             if (resultado.next()) {
@@ -116,6 +117,7 @@ public class MateriaDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idMateria);
             resultado = consultarBase(preparedStatement);
+            
             Materia materia = null;
 
             if (resultado.next()) {
@@ -134,6 +136,7 @@ public class MateriaDAO extends DAO {
 
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             resultado = consultarBase(preparedStatement);
+            
             Collection<Materia> materias = new ArrayList();
 
             while (resultado.next()) {

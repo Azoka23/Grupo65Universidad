@@ -64,8 +64,8 @@ public class InscripcionDAO extends DAO {
         } catch (SQLException ex) {
             // Manejar la excepción si es necesario
             throw ex;
-        } finally {
-            desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
+        //} finally {
+         //   desconectarBase(); // Asegura que la desconexión se realice incluso en caso de excepción.
         }
 
     }
@@ -119,6 +119,7 @@ public class InscripcionDAO extends DAO {
         try (PreparedStatement preparedStatement = conexion.prepareStatement(sql)) {
             preparedStatement.setInt(1, idAlumno);
             resultado = consultarBase(preparedStatement);
+            
             Collection<Materia> materias = new ArrayList();
             while (resultado.next()) {
                 int idMateria = resultado.getInt("idMateria");
@@ -143,6 +144,7 @@ public class InscripcionDAO extends DAO {
             preparedStatement.setInt(1, idAlumno);
 
             resultado = consultarBase(preparedStatement);
+            
             Collection<Materia> materias = new ArrayList();
 
             while (resultado.next()) {
@@ -171,6 +173,7 @@ public class InscripcionDAO extends DAO {
 
             preparedStatement.setInt(1, idMateria);
             resultado = consultarBase(preparedStatement);
+           
             Collection<Alumno> alumnos = new ArrayList();
 
             while (resultado.next()) {
@@ -195,10 +198,11 @@ public class InscripcionDAO extends DAO {
             preparedStatement.setInt(2, idMateria);
 
             resultado = consultarBase(preparedStatement);
+           
 
             while (resultado.next()) {
 
-                nota = resultado.getInt("nota");
+                nota = resultado.getDouble("nota");
             }
 
             return nota;
