@@ -4,7 +4,9 @@ import grupo65universidad.Entidades.Alumno;
 import javax.swing.JOptionPane;
 
 public class IngresoAlSistema extends javax.swing.JFrame {
-private boolean passwordVisible = false; // Variable de estado para rastrear la visibilidad de la contraseña
+
+    private boolean passwordVisible = false; // Variable de estado para rastrear la visibilidad de la contraseña
+
     /**
      * Creates new form MenuPrincipal
      */
@@ -143,22 +145,22 @@ private boolean passwordVisible = false; // Variable de estado para rastrear la 
 
     private void jLmostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLmostrarMouseClicked
         //jTPassword.setEchoChar((char) 0);
-        
-    if (passwordVisible) {
-        // Si la contraseña está visible, ocúltala
-        jTPassword.setEchoChar('*'); // O establece cualquier otro carácter que desees para ocultar la contraseña
-    } else {
-        // Si la contraseña está oculta, muéstrala
-        jTPassword.setEchoChar((char) 0);
-    }
-    
-    // Invierte el estado
-    passwordVisible = !passwordVisible;
+
+        if (passwordVisible) {
+            // Si la contraseña está visible, ocúltala
+            jTPassword.setEchoChar('*'); // O establece cualquier otro carácter que desees para ocultar la contraseña
+        } else {
+            // Si la contraseña está oculta, muéstrala
+            jTPassword.setEchoChar((char) 0);
+        }
+
+        // Invierte el estado
+        passwordVisible = !passwordVisible;
 
 
     }//GEN-LAST:event_jLmostrarMouseClicked
 
- /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -224,6 +226,9 @@ private boolean passwordVisible = false; // Variable de estado para rastrear la 
             jpLogging.removeAll();
             jpLogging.repaint();
             Menu menu = new Menu();
+
+            //menu.add(menu);
+            menu.setVisible(true);
             menu.setVisible(true);
             menu.setLocationRelativeTo(null);
         } else {
